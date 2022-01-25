@@ -14,6 +14,8 @@ public class breakBoardData : BoardData
         foreach (Cell c in base.cells)
         {
             c.container = new breakCellContainer();
+            c.Actions.Add("click", new actionBreakClick());
+            c.Actions["click"].cell = c;
 
             int randid = Random.Range(0, base.prefabCellContain.Length);
 
@@ -25,7 +27,16 @@ public class breakBoardData : BoardData
             GameObject go = GameObject.Instantiate(base.prefabCellContain[randid]);
             go.transform.position = transform.position + Vector3.up * (row - height / 2.0f) + Vector3.right * (col - width / 2.0f);
 
-            index++;
+            if (go.GetComponent<cellClick>() == null)
+                go.AddComponent<cellClick>();
+
+            go.GetComponent<cellClick>().id = randid;
+            go.GetComponent<cellClick>().cell = c;
+
+            c.gameObject = go;
+
+
+           index++;
         }
     }
 
