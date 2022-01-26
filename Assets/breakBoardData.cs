@@ -16,6 +16,8 @@ public class breakBoardData : BoardData
             c.container = new breakCellContainer();
             c.Actions.Add("click", new actionBreakClick());
             c.Actions["click"].cell = c;
+            c.Actions.Add("Fall", new actionFall());
+            c.Actions["Fall"].cell = c;
 
             int randid = Random.Range(0, base.prefabCellContain.Length);
 
@@ -29,9 +31,15 @@ public class breakBoardData : BoardData
 
             if (go.GetComponent<cellClick>() == null)
                 go.AddComponent<cellClick>();
-
-            go.GetComponent<cellClick>().id = randid;
+            
             go.GetComponent<cellClick>().cell = c;
+
+            if (go.GetComponent<moveCell>() == null)
+                go.AddComponent<moveCell>();
+
+            go.GetComponent<moveCell>().cell = c;
+
+            c.position = transform.position + Vector3.up * (row - height / 2.0f) + Vector3.right * (col - width / 2.0f);
 
             c.gameObject = go;
 
@@ -39,10 +47,12 @@ public class breakBoardData : BoardData
            index++;
         }
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+
+        foreach (Cell c in cells)
+        {
+            ((actionFall)c.Actions["Fall"]).Update();
+        }
     }
 }

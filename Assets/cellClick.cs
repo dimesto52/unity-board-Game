@@ -5,7 +5,6 @@ using UnityEngine;
 public class cellClick : MonoBehaviour
 {
     public Cell cell = null;
-    public int id;
 
     // Start is called before the first frame update
     void Start()
@@ -22,9 +21,9 @@ public class cellClick : MonoBehaviour
     private void OnMouseDown()
     {
         string[] arg = new string[1];
-        arg[0] = id.ToString();
+        arg[0] = cell.container.Get_idObj().ToString();
 
         ((actionBreakClick)cell.Actions["click"]).go(arg);
-        Debug.Log(cell.Actions["click"] + " : " + id.ToString());
+        //Debug.Log(cell.Actions["click"] + " : " + id.ToString() + " / " + cell.container.Get_idObj());
     }
 }

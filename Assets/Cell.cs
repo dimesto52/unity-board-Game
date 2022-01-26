@@ -5,6 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class Cell
 {
+
+    public Vector3 position;
+
     public Cell()
     {
         Actions = new Dictionary<string, CellAction>();
