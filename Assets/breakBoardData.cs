@@ -54,5 +54,33 @@ public class breakBoardData : BoardData
         {
             ((actionFall)c.Actions["Fall"]).Update();
         }
+
+        for (int x = 0; x < width; x++)
+        {
+            int y = this.height - 1;
+            Cell c = cells[x + y * width];
+            if(c.container.Get_idObj() == -1)
+            {
+
+                int randid = Random.Range(0, base.prefabCellContain.Length);
+                c.container.Set_idObj(randid);
+
+                GameObject go = GameObject.Instantiate(base.prefabCellContain[randid]);
+                go.transform.position = c.position;
+
+                if (go.GetComponent<cellClick>() == null)
+                    go.AddComponent<cellClick>();
+
+                go.GetComponent<cellClick>().cell = c;
+
+                if (go.GetComponent<moveCell>() == null)
+                    go.AddComponent<moveCell>();
+
+                go.GetComponent<moveCell>().cell = c;
+                c.gameObject = go;
+
+            }
+        }
+
     }
 }

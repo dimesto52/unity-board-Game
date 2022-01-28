@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class moveCell : MonoBehaviour
 {
+    public float speed = 2.0f;
     public Cell cell = null;
 
     // Start is called before the first frame update
@@ -15,6 +16,6 @@ public class moveCell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, cell.position, Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, cell.position, Time.deltaTime* speed);
     }
 }
