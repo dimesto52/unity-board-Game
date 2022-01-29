@@ -16,6 +16,11 @@ public class moveCell : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, cell.position, Time.deltaTime* speed);
+        Debug.DrawLine(transform.position, cell.position, Color.yellow);
+
+        if (Vector3.Distance(transform.position, cell.position) > 0.1f)
+            transform.position = Vector3.Lerp(transform.position, cell.position, Time.deltaTime * speed);
+        else
+            transform.position = cell.position;
     }
 }

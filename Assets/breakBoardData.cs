@@ -38,6 +38,7 @@ public class breakBoardData : BoardData
                 go.AddComponent<moveCell>();
 
             go.GetComponent<moveCell>().cell = c;
+            go.GetComponent<moveCell>().speed = speedStep;
 
             c.position = transform.position + Vector3.up * (row - height / 2.0f) + Vector3.right * (col - width / 2.0f);
 
@@ -47,40 +48,50 @@ public class breakBoardData : BoardData
            index++;
         }
     }
+
+    public float timeLeft = 0;
+    public float speedStep = 2.0f;
+    public float waitStep = 0.5f;
+
     void Update()
     {
+        timeLeft += Time.deltaTime * speedStep;
 
-        foreach (Cell c in cells)
+        if (timeLeft >= 1.0f + waitStep)
         {
-            ((actionFall)c.Actions["Fall"]).Update();
-        }
-
-        for (int x = 0; x < width; x++)
-        {
-            int y = this.height - 1;
-            Cell c = cells[x + y * width];
-            if(c.container.Get_idObj() == -1)
+            timeLeft -= 1.0f + waitStep;
+            
+            foreach (Cell c in cells)
             {
+                ((actionFall)c.Actions["Fall"]).Update();
+            }
 
-                int randid = Random.Range(0, base.prefabCellContain.Length);
-                c.container.Set_idObj(randid);
+            for (int x = 0; x < width; x++)
+            {
+                int y = this.height - 1;
+                Cell c = cells[x + y * width];
+                if (c.container.Get_idObj() == -1)
+                {
 
-                GameObject go = GameObject.Instantiate(base.prefabCellContain[randid]);
-                go.transform.position = c.position;
+                    int randid = Random.Range(0, base.prefabCellContain.Length);
+                    c.container.Set_idObj(randid);
 
-                if (go.GetComponent<cellClick>() == null)
-                    go.AddComponent<cellClick>();
+                    GameObject go = GameObject.Instantiate(base.prefabCellContain[randid]);
+                    go.transform.position = c.position + Vector3.up;
 
-                go.GetComponent<cellClick>().cell = c;
+                    if (go.GetComponent<cellClick>() == null)
+                        go.AddComponent<cellClick>();
 
-                if (go.GetComponent<moveCell>() == null)
-                    go.AddComponent<moveCell>();
+                    go.GetComponent<cellClick>().cell = c;
 
-                go.GetComponent<moveCell>().cell = c;
-                c.gameObject = go;
+                    if (go.GetComponent<moveCell>() == null)
+                        go.AddComponent<moveCell>();
 
+                    go.GetComponent<moveCell>().cell = c;
+                    c.gameObject = go;
+
+                }
             }
         }
-
     }
 }

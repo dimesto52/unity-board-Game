@@ -11,7 +11,7 @@ public class Cell
     public Cell()
     {
         Actions = new Dictionary<string, CellAction>();
-    }
+    }   
 
     public CellContainer container;
     public Dictionary<string,CellAction> Actions;
