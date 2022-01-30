@@ -6,6 +6,7 @@ using UnityEngine;
 public class Cell
 {
 
+    public string debugName;
     public Vector3 position;
 
     public Cell()
@@ -23,5 +24,16 @@ public class Cell
     public Cell down = null;
 
     public GameObject gameObject;
+
+    public void debug()
+    {
+        if(gameObject!=null)
+            Debug.DrawLine(position, gameObject.transform.position, Color.green);
+
+        if(container.Get_idObj() == -1)
+        {
+            Debug.DrawLine(position, position + Vector3.down, Color.red);
+        }
+    }
 
 }

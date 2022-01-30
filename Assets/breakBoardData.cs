@@ -43,6 +43,7 @@ public class breakBoardData : BoardData
             c.position = transform.position + Vector3.up * (row - height / 2.0f) + Vector3.right * (col - width / 2.0f);
 
             c.gameObject = go;
+            go.name = "gem" + index;
 
 
            index++;
@@ -51,7 +52,7 @@ public class breakBoardData : BoardData
 
     public float timeLeft = 0;
     public float speedStep = 2.0f;
-    public float waitStep = 0.5f;
+    public float waitStep = 0.05f;
 
     void Update()
     {
@@ -88,10 +89,17 @@ public class breakBoardData : BoardData
                         go.AddComponent<moveCell>();
 
                     go.GetComponent<moveCell>().cell = c;
+
                     c.gameObject = go;
 
                 }
             }
+        }
+
+
+        foreach (Cell c in cells)
+        {
+            c.debug();
         }
     }
 }

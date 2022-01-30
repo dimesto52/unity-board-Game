@@ -15,12 +15,11 @@ public class actionBreakClick : CellAction
         if (val == cell.container.Get_idObj())
         {
 
-            if (cell.gameObject != null)
-            {
+            //Debug.Log(cell.debugName);
+
                 GameObject.Destroy(cell.gameObject);
                 cell.container.Set_idObj(-1);
                 cell.gameObject = null;
-            }
 
             if (cell.left != null)
             {

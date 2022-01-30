@@ -26,6 +26,7 @@ public class BoardData : MonoBehaviour
             for(int y = 0; y<height;y++)
             {
                 cells[x + y * width] = new Cell();
+                cells[x + y * width].debugName = x.ToString() + " : " + y.ToString();
                 if (x > 0)
                 {
                     cells[x + y * width].left = cells[(x - 1) + y * width];
