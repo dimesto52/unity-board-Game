@@ -20,10 +20,13 @@ public class cellClick : MonoBehaviour
 
     private void OnMouseDown()
     {
-        string[] arg = new string[1];
-        arg[0] = cell.container.Get_idObj().ToString();
+        if (moveCell.canmove)
+        {
+            string[] arg = new string[1];
+            arg[0] = cell.container.Get_idObj().ToString();
 
-        ((actionBreakClick)cell.Actions["click"]).go(arg);
-        //Debug.Log(cell.Actions["click"] + " : " + id.ToString() + " / " + cell.container.Get_idObj());
+            ((actionBreakClick)cell.Actions["click"]).go(arg);
+            //Debug.Log(cell.Actions["click"] + " : " + id.ToString() + " / " + cell.container.Get_idObj());
+        }
     }
 }
