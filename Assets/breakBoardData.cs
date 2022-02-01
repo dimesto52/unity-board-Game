@@ -5,6 +5,12 @@ using UnityEngine;
 public class breakBoardData : BoardData
 {
     // Start is called before the first frame update
+
+
+    public GameObject particul;
+    public GameObject soundbreak;
+    public GameObject soundpop;
+
     new void Start()
     {
         base.Start();
@@ -40,6 +46,11 @@ public class breakBoardData : BoardData
             go.GetComponent<moveCell>().cell = c;
             go.GetComponent<moveCell>().speed = speedStep;
 
+            if (go.GetComponent<onBreakPrefab>() == null)
+                go.AddComponent<onBreakPrefab>();
+            go.GetComponent<onBreakPrefab>().particul = particul;
+            go.GetComponent<onBreakPrefab>().sound = soundbreak;
+
             c.position = transform.position + Vector3.up * (row - height / 2.0f) + Vector3.right * (col - width / 2.0f);
 
             c.gameObject = go;
@@ -74,6 +85,9 @@ public class breakBoardData : BoardData
                 if (c.container.Get_idObj() == -1)
                 {
 
+                    GameObject.Instantiate(soundpop, c.position,Quaternion.identity);
+
+
                     int randid = Random.Range(0, base.prefabCellContain.Length);
                     c.container.Set_idObj(randid);
 
@@ -82,13 +96,19 @@ public class breakBoardData : BoardData
 
                     if (go.GetComponent<cellClick>() == null)
                         go.AddComponent<cellClick>();
-
                     go.GetComponent<cellClick>().cell = c;
 
                     if (go.GetComponent<moveCell>() == null)
                         go.AddComponent<moveCell>();
-
                     go.GetComponent<moveCell>().cell = c;
+
+                    if (go.GetComponent<onBreakPrefab>() == null)
+                        go.AddComponent<onBreakPrefab>();
+                    go.GetComponent<onBreakPrefab>().particul = particul;
+                    go.GetComponent<onBreakPrefab>().sound = soundbreak;
+
+                    if (go.GetComponent<increaseInStart>() == null)
+                        go.AddComponent<increaseInStart>();
 
                     c.gameObject = go;
 

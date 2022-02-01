@@ -216,6 +216,15 @@ MonoBehaviour:
   prefabCellContain:
   - {fileID: 8425032644258207736, guid: cf163661325c7264da3afb58957cabf4, type: 3}
   - {fileID: 572587810718624340, guid: cbcfcd48583d09b48831ac2ea9324f2f, type: 3}
+  particul: {fileID: 8809966757340786746, guid: af51d23ca3286af4bb67ab4cb02993e8,
+    type: 3}
+  soundbreak: {fileID: 6636710701355125038, guid: b4257c1e57f1638499251538e2aa1e42,
+    type: 3}
+  soundpop: {fileID: 3854032465398352372, guid: 47b8d173f8f922a408e555c854af4e59,
+    type: 3}
+  timeLeft: 0
+  speedStep: 2
+  waitStep: 0.05
 --- !u!4 &397706785
 Transform:
   m_ObjectHideFlags: 0
