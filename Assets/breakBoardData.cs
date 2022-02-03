@@ -11,54 +11,34 @@ public class breakBoardData : BoardData
     public GameObject soundbreak;
     public GameObject soundpop;
 
+    int indexGem = 0;
+
     new void Start()
     {
         base.Start();
 
-        int index = 0;
+        for (int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++)
+            {
+                Cell c = getCell(x, y);
+                c.container = new breakCellContainer();
+                c.Actions.Add("click", new actionBreakClick());
+                c.Actions["click"].cell = c;
+                c.Actions.Add("Fall", new actionFall());
+                c.Actions["Fall"].cell = c;
 
-        foreach (Cell c in base.cells)
-        {
-            c.container = new breakCellContainer();
-            c.Actions.Add("click", new actionBreakClick());
-            c.Actions["click"].cell = c;
-            c.Actions.Add("Fall", new actionFall());
-            c.Actions["Fall"].cell = c;
+                int randid = Random.Range(0, base.prefabCellContain.Length);
 
-            int randid = Random.Range(0, base.prefabCellContain.Length);
-
-            c.container.Set_idObj(randid);
-
-            int row = index / height;
-            int col = index % height;
-
-            GameObject go = GameObject.Instantiate(base.prefabCellContain[randid]);
-            go.transform.position = transform.position + Vector3.up * (row - height / 2.0f) + Vector3.right * (col - width / 2.0f);
-
-            if (go.GetComponent<cellClick>() == null)
-                go.AddComponent<cellClick>();
-            
-            go.GetComponent<cellClick>().cell = c;
-
-            if (go.GetComponent<moveCell>() == null)
-                go.AddComponent<moveCell>();
-
-            go.GetComponent<moveCell>().cell = c;
-            go.GetComponent<moveCell>().speed = speedStep;
-
-            if (go.GetComponent<onBreakPrefab>() == null)
-                go.AddComponent<onBreakPrefab>();
-            go.GetComponent<onBreakPrefab>().particul = particul;
-            go.GetComponent<onBreakPrefab>().sound = soundbreak;
-
-            c.position = transform.position + Vector3.up * (row - height / 2.0f) + Vector3.right * (col - width / 2.0f);
-
-            c.gameObject = go;
-            go.name = "gem" + index;
+                c.container.Set_idObj(randid);
+                c.position = transform.position + Vector3.up * (y - height / 2.0f) + Vector3.right * (x - width / 2.0f);
 
 
-           index++;
-        }
+                GameObject go = gemCreator(randid, c);
+
+                c.gameObject = go;
+                go.name = "gem";
+
+            }
     }
 
     public float timeLeft = 0;
@@ -72,7 +52,7 @@ public class breakBoardData : BoardData
         if (timeLeft >= 1.0f + waitStep)
         {
             timeLeft -= 1.0f + waitStep;
-            
+
             foreach (Cell c in cells)
             {
                 ((actionFall)c.Actions["Fall"]).Update();
@@ -85,30 +65,15 @@ public class breakBoardData : BoardData
                 if (c.container.Get_idObj() == -1)
                 {
 
-                    GameObject.Instantiate(soundpop, c.position,Quaternion.identity);
+                    GameObject.Instantiate(soundpop, c.position, Quaternion.identity);
 
 
                     int randid = Random.Range(0, base.prefabCellContain.Length);
                     c.container.Set_idObj(randid);
 
-                    GameObject go = GameObject.Instantiate(base.prefabCellContain[randid]);
-                    go.transform.position = c.position + Vector3.up;
+                    GameObject go = gemCreator(randid, c);
 
-                    if (go.GetComponent<cellClick>() == null)
-                        go.AddComponent<cellClick>();
-                    go.GetComponent<cellClick>().cell = c;
-
-                    if (go.GetComponent<moveCell>() == null)
-                        go.AddComponent<moveCell>();
-                    go.GetComponent<moveCell>().cell = c;
-
-                    if (go.GetComponent<onBreakPrefab>() == null)
-                        go.AddComponent<onBreakPrefab>();
-                    go.GetComponent<onBreakPrefab>().particul = particul;
-                    go.GetComponent<onBreakPrefab>().sound = soundbreak;
-
-                    if (go.GetComponent<increaseInStart>() == null)
-                        go.AddComponent<increaseInStart>();
+                    go.transform.position += Vector3.up;
 
                     c.gameObject = go;
 
@@ -121,5 +86,37 @@ public class breakBoardData : BoardData
         {
             c.debug();
         }
+    }
+
+    GameObject gemCreator(int id, Cell c)
+    {
+        GameObject go = GameObject.Instantiate(base.prefabCellContain[id]);
+        go.transform.position = c.position;
+
+        if (go.GetComponent<cellLink>() == null)
+            go.AddComponent<cellLink>();
+
+        go.GetComponent<cellLink>().cell = c;
+
+        if (go.GetComponent<cellClick>() == null)
+            go.AddComponent<cellClick>();
+
+        if (go.GetComponent<moveCell>() == null)
+            go.AddComponent<moveCell>();
+
+        go.GetComponent<moveCell>().speed = speedStep;
+
+        if (go.GetComponent<onBreakPrefab>() == null)
+            go.AddComponent<onBreakPrefab>();
+        go.GetComponent<onBreakPrefab>().particul = particul;
+        go.GetComponent<onBreakPrefab>().sound = soundbreak;
+
+        if (go.GetComponent<increaseInStart>() == null)
+            go.AddComponent<increaseInStart>();
+
+        go.name = "gem" + indexGem;
+        indexGem++;
+
+        return go;
     }
 }

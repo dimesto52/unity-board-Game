@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class cellClick : MonoBehaviour
 {
-    public Cell cell = null;
+    public Cell cell
+    {
+        get
+        {
+            return this.GetComponent<cellLink>().cell;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

@@ -27,12 +27,13 @@ public class Cell
 
     public void debug()
     {
+        /*
         if(gameObject!=null)
-            Debug.DrawLine(position, gameObject.transform.position, Color.green);
+            Debug.DrawLine(position, gameObject.transform.position, Color.green);*/
 
-        if(container.Get_idObj() == -1)
+        if(down != null)
         {
-            Debug.DrawLine(position, position + Vector3.down, Color.red);
+            Debug.DrawLine(position, down.position, Color.red);
         }
     }
 

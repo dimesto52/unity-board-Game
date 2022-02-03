@@ -17,7 +17,7 @@ public class actionBreakClick : CellAction
 
             //Debug.Log(cell.debugName);
 
-                GameObject.Destroy(cell.gameObject);
+            cell.gameObject.SendMessage("Onbreak");
                 cell.container.Set_idObj(-1);
                 cell.gameObject = null;
 

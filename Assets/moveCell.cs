@@ -5,7 +5,13 @@ using UnityEngine;
 public class moveCell : MonoBehaviour
 {
     public float speed = 2.0f;
-    public Cell cell = null;
+    public Cell cell
+    {
+        get
+        {
+            return this.GetComponent<cellLink>().cell;
+        }
+    }
 
     public bool lasmove = false;
     static public int hasmove = 0;

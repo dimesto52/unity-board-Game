@@ -27,8 +27,7 @@ public class actionFall : CellAction
                 last.gameObject = go;
                 last.container.Set_idObj(cell.container.Get_idObj());
 
-                    go.GetComponent<cellClick>().cell = last;
-                    go.GetComponent<moveCell>().cell = last;
+                    go.GetComponent<cellLink>().cell = last;
 
                     cell.gameObject = null;
                 cell.container.Set_idObj(-1);

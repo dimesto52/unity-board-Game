@@ -19,9 +19,10 @@ public class onBreakPrefab : MonoBehaviour
     public GameObject particul;
     public GameObject sound;
 
-    private void OnDestroy()
+    private void Onbreak()
     {
         GameObject.Instantiate(particul, transform.position,transform.rotation);
         GameObject.Instantiate(sound, transform.position, transform.rotation);
+        GameObject.Destroy(this.gameObject);
     }
 }

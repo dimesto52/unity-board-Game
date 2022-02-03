@@ -11,35 +11,35 @@ public class BoardData : MonoBehaviour
 
     public GameObject[] prefabCellContain;
 
-    // Start is called before the first frame update
     public void Start()
     {
         cells = new Cell[height * width];
-        /*
-        for (int i = 0; i < cells.Length;i++)
-        {
-            cells[i] = new Cell();
-        }
-        */
 
-        for(int x = 0; x<width; x++ )
-            for(int y = 0; y<height;y++)
+        for (int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++)
             {
-                cells[x + y * width] = new Cell();
-                cells[x + y * width].debugName = x.ToString() + " : " + y.ToString();
+                setCell(x, y, new Cell());
+                getCell(x, y).debugName = x.ToString() + " : " + y.ToString();
                 if (x > 0)
                 {
-                    cells[x + y * width].left = cells[(x - 1) + y * width];
-                    cells[(x - 1) + y * width].right = cells[x + y * width];
+                    getCell(x, y).left = getCell((x - 1), y);
+                    getCell((x - 1), y).right = getCell(x, y);
                 }
                 if (y > 0)
                 {
-                    cells[x + y * width].down = cells[x + (y - 1) * width];
-                    cells[x + (y - 1) * width].up = cells[x + y * width];
+                    getCell(x, y).down = getCell(x, (y - 1));
+                    getCell(x, (y - 1)).up = getCell(x, y);
                 }
 
             }
 
     }
-
+    public Cell getCell(int x , int y)
+    {
+        return cells[x + y * width];
+    }
+    public void setCell(int x , int y, Cell c)
+    {
+        cells[x + y * width] = c;
+    }
 }
