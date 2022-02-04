@@ -216,6 +216,8 @@ MonoBehaviour:
   prefabCellContain:
   - {fileID: 8425032644258207736, guid: cf163661325c7264da3afb58957cabf4, type: 3}
   - {fileID: 572587810718624340, guid: cbcfcd48583d09b48831ac2ea9324f2f, type: 3}
+  - {fileID: 2873399128836492330, guid: 0153d21bd35472c40bd648669226ce11, type: 3}
+  - {fileID: 6785841088072236585, guid: 4428549aa8488074db13315242ddd968, type: 3}
   particul: {fileID: 8809966757340786746, guid: af51d23ca3286af4bb67ab4cb02993e8,
     type: 3}
   soundbreak: {fileID: 6636710701355125038, guid: b4257c1e57f1638499251538e2aa1e42,
@@ -315,7 +317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

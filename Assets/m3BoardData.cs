@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class breakBoardData : BoardData
+public class m3BoardData : BoardData
 {
-    // Start is called before the first frame update
 
 
     public GameObject particul;
@@ -22,7 +21,7 @@ public class breakBoardData : BoardData
             {
                 Cell c = getCell(x, y);
                 c.container = new breakCellContainer();
-                c.Actions.Add("click", new actionBreakClick());
+                c.Actions.Add("click", new actionM3Click());
                 c.Actions["click"].cell = c;
                 c.Actions.Add("Fall", new actionFall());
                 c.Actions["Fall"].cell = c;
@@ -56,30 +55,7 @@ public class breakBoardData : BoardData
             {
                 ((actionFall)c.Actions["Fall"]).Update();
             }
-
-            for (int x = 0; x < width; x++)
-            {
-                int y = this.height - 1;
-                Cell c = cells[x + y * width];
-                if (c.container.Get_idObj() == -1)
-                {
-
-                    GameObject.Instantiate(soundpop, c.position, Quaternion.identity);
-
-
-                    int randid = Random.Range(0, base.prefabCellContain.Length);
-                    c.container.Set_idObj(randid);
-
-                    GameObject go = gemCreator(randid, c);
-
-                    go.transform.position += Vector3.up;
-
-                    c.gameObject = go;
-
-                }
-            }
         }
-
 
         foreach (Cell c in cells)
         {
@@ -97,8 +73,8 @@ public class breakBoardData : BoardData
 
         go.GetComponent<cellLink>().cell = c;
 
-        if (go.GetComponent<cellClick>() == null)
-            go.AddComponent<cellClick>();
+        if (go.GetComponent<m3CellClick>() == null)
+            go.AddComponent<m3CellClick>();   
 
         if (go.GetComponent<moveCell>() == null)
             go.AddComponent<moveCell>();
