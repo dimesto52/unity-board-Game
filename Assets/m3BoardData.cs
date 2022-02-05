@@ -25,6 +25,8 @@ public class m3BoardData : BoardData
                 c.Actions["click"].cell = c;
                 c.Actions.Add("Fall", new actionFall());
                 c.Actions["Fall"].cell = c;
+                c.Actions.Add("kill", new actionM3Kill());
+                c.Actions["kill"].cell = c;
 
                 int randid = Random.Range(0, base.prefabCellContain.Length);
 
@@ -54,6 +56,28 @@ public class m3BoardData : BoardData
             foreach (Cell c in cells)
             {
                 ((actionFall)c.Actions["Fall"]).Update();
+            }
+
+            for (int x = 0; x < width; x++)
+            {
+                int y = this.height - 1;
+                Cell c = cells[x + y * width];
+                if (c.container.Get_idObj() == -1)
+                {
+
+                    GameObject.Instantiate(soundpop, c.position, Quaternion.identity);
+
+
+                    int randid = Random.Range(0, base.prefabCellContain.Length);
+                    c.container.Set_idObj(randid);
+
+                    GameObject go = gemCreator(randid, c);
+
+                    go.transform.position += Vector3.up;
+
+                    c.gameObject = go;
+
+                }
             }
         }
 
