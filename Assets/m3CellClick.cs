@@ -35,7 +35,7 @@ public class m3CellClick : MonoBehaviour
             }
             else
             {
-                    Debug.Log("move ok");
+                    //Debug.Log("move ok");
                 ((actionM3Kill)actionM3Click.first.Actions["kill"]).Update();
                 ((actionM3Kill)actionM3Click.second.Actions["kill"]).Update();
 

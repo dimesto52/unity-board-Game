@@ -16,19 +16,29 @@ public class m3BoardData : BoardData
     {
         base.Start();
 
+        foreach (Cell c in cells)
+        {
+
+            c.container = new breakCellContainer();
+            c.container.Set_idObj(-1);
+            c.Actions.Add("click", new actionM3Click());
+            c.Actions["click"].cell = c;
+            c.Actions.Add("Fall", new actionFall());
+            c.Actions["Fall"].cell = c;
+            c.Actions.Add("kill", new actionM3Kill());
+            c.Actions["kill"].cell = c;
+
+        }
+
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
             {
                 Cell c = getCell(x, y);
-                c.container = new breakCellContainer();
-                c.Actions.Add("click", new actionM3Click());
-                c.Actions["click"].cell = c;
-                c.Actions.Add("Fall", new actionFall());
-                c.Actions["Fall"].cell = c;
-                c.Actions.Add("kill", new actionM3Kill());
-                c.Actions["kill"].cell = c;
 
-                int randid = Random.Range(0, base.prefabCellContain.Length);
+                int[] validid = gemValid(c);
+                int rand = Random.Range(0, validid.Length);
+
+                int randid = validid[rand];
 
                 c.container.Set_idObj(randid);
                 c.position = transform.position + Vector3.up * (y - height / 2.0f) + Vector3.right * (x - width / 2.0f);
@@ -68,7 +78,10 @@ public class m3BoardData : BoardData
                     GameObject.Instantiate(soundpop, c.position, Quaternion.identity);
 
 
-                    int randid = Random.Range(0, base.prefabCellContain.Length);
+                    int[] validid = gemValid(c);
+                    int rand = Random.Range(0, validid.Length);
+
+                    int randid = validid[rand];
                     c.container.Set_idObj(randid);
 
                     GameObject go = gemCreator(randid, c);
@@ -98,7 +111,7 @@ public class m3BoardData : BoardData
         go.GetComponent<cellLink>().cell = c;
 
         if (go.GetComponent<m3CellClick>() == null)
-            go.AddComponent<m3CellClick>();   
+            go.AddComponent<m3CellClick>();
 
         if (go.GetComponent<moveCell>() == null)
             go.AddComponent<moveCell>();
@@ -117,5 +130,99 @@ public class m3BoardData : BoardData
         indexGem++;
 
         return go;
+    }
+    int[] gemValid(Cell c)
+    {
+        List<int> valid = new List<int>();
+
+        Cell lastcell = ((actionFall)c.Actions["Fall"]).lastEmpty();
+
+        for(int i = 0; i < base.prefabCellContain.Length; i++)
+        {
+            if (check(i, c))
+                valid.Add(i);
+        }
+
+
+        return valid.ToArray();
+    }
+    public bool check(int i, Cell c)
+    {
+        return (check_vertical(i, c) && check_horizontal(i, c));
+    }
+    public bool check_vertical(int i, Cell c)
+    {
+        int l1 = -2;
+        int l2 = -2;
+        int r1 = -2;
+        int r2 = -2;
+        if (c.left != null)
+        {
+            l1 = c.left.container.Get_idObj();
+            if (c.left.left != null) l2 = c.left.left.container.Get_idObj();
+        }
+        if (c.right != null)
+        {
+            r1 = c.right.container.Get_idObj();
+            if (c.right.right != null) r2 = c.right.right.container.Get_idObj();
+        }
+
+        if (l1 == i)
+        {
+            if (r1 == l1)
+            {
+                return false;
+            }
+            else if (l2 == l1)
+            {
+                return false;
+            }
+        }
+        else if (r1 == i)
+        {
+            if (r2 == r1)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public bool check_horizontal(int i, Cell c)
+    {
+        int d1 = -2;
+        int d2 = -2;
+        int u1 = -2;
+        int u2 = -2;
+        if (c.down != null)
+        {
+            d1 = c.down.container.Get_idObj();
+            if (c.down.down != null) d2 = c.down.down.container.Get_idObj();
+        }
+        if (c.up != null)
+        {
+            u1 = c.up.container.Get_idObj();
+            if (c.up.up != null) u2 = c.up.up.container.Get_idObj();
+        }
+
+        if (d1 == i)
+        {
+            if (u1 == d1)
+            {
+                return false;
+            }
+            else if (d2 == d1)
+            {
+                return false;
+            }
+        }
+        else if (u1 == i)
+        {
+            if (u2 == u1)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -9,7 +9,7 @@ public class actionM3Kill : CellAction
     // Update is called once per frame
     public new void Update()
     {
-        Debug.Log("kill");
+        //Debug.Log("kill");
 
         if (vertical >= 2 || horizontal >= 2)
         {
@@ -18,7 +18,7 @@ public class actionM3Kill : CellAction
             if (vertical >= 2)
             {
 
-                Debug.Log("vertical");
+                //Debug.Log("vertical");
 
                 up_break(id);
                 down_break(id);
