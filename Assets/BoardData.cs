@@ -19,6 +19,7 @@ public class BoardData : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 setCell(x, y, new Cell());
+                getCell(x, y).board = this;
                 getCell(x, y).debugName = x.ToString() + " : " + y.ToString();
                 if (x > 0)
                 {

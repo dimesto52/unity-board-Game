@@ -9,6 +9,8 @@ public class Cell
     public string debugName;
     public Vector3 position;
 
+    public BoardData board;
+
     public Cell()
     {
         Actions = new Dictionary<string, CellAction>();

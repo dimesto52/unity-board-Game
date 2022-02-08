@@ -12,6 +12,10 @@ public class m3BoardData : BoardData
 
     int indexGem = 0;
 
+
+    public GameObject[] prefabBonusContain;
+
+
     new void Start()
     {
         base.Start();
@@ -128,6 +132,40 @@ public class m3BoardData : BoardData
 
         go.name = "gem" + indexGem;
         indexGem++;
+
+        return go;
+    }
+    public GameObject spawnBonus(int id, Cell c)
+    {
+        GameObject go = GameObject.Instantiate(prefabBonusContain[id]);
+        go.transform.position = c.position;
+
+        if (go.GetComponent<cellLink>() == null)
+            go.AddComponent<cellLink>();
+
+        go.GetComponent<cellLink>().cell = c;
+
+        if (go.GetComponent<m3CellClick>() == null)
+            go.AddComponent<m3CellClick>();
+
+        if (go.GetComponent<moveCell>() == null)
+            go.AddComponent<moveCell>();
+
+        go.GetComponent<moveCell>().speed = speedStep;
+
+        if (go.GetComponent<onBreakPrefab>() == null)
+            go.AddComponent<onBreakPrefab>();
+        go.GetComponent<onBreakPrefab>().particul = particul;
+        go.GetComponent<onBreakPrefab>().sound = soundbreak;
+
+        if (go.GetComponent<increaseInStart>() == null)
+            go.AddComponent<increaseInStart>();
+
+        go.name = "gemBonus" + indexGem;
+        indexGem++;
+        
+        c.gameObject = go;
+        c.container.Set_idObj(id);
 
         return go;
     }

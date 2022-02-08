@@ -5,7 +5,6 @@ using UnityEngine;
 public class actionM3Kill : CellAction
 {
 
-
     // Update is called once per frame
     public new void Update()
     {
@@ -30,6 +29,12 @@ public class actionM3Kill : CellAction
             }
 
             kill();
+
+            if(vertical + horizontal >= 4)
+            {
+                GameObject go = ((m3BoardData)cell.board).spawnBonus(id, cell);
+                cell.gameObject = go;
+            }
 
         }
     }
