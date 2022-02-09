@@ -40,6 +40,7 @@ public class moveCell : MonoBehaviour
         {
             Vector3 dir = (cell.position - transform.position).normalized;
             transform.position = transform.position + dir * Time.deltaTime * speed;
+
             if (lasmove == false)
             {
                 lasmove = true;
@@ -54,6 +55,8 @@ public class moveCell : MonoBehaviour
             {
                 lasmove = false;
                 hasmove -= 1;
+
+                this.gameObject.SendMessage("endMove", SendMessageOptions.DontRequireReceiver);
             }
 
         }

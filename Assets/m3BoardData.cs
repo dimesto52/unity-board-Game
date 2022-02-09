@@ -119,6 +119,8 @@ public class m3BoardData : BoardData
 
         if (go.GetComponent<moveCell>() == null)
             go.AddComponent<moveCell>();
+        if (go.GetComponent<m3UpdateEndMove>() == null)
+            go.AddComponent<m3UpdateEndMove>();
 
         go.GetComponent<moveCell>().speed = speedStep;
 
@@ -150,6 +152,8 @@ public class m3BoardData : BoardData
 
         if (go.GetComponent<moveCell>() == null)
             go.AddComponent<moveCell>();
+        if (go.GetComponent<m3UpdateEndMove>() == null)
+            go.AddComponent<m3UpdateEndMove>();
 
         go.GetComponent<moveCell>().speed = speedStep;
 

@@ -22,29 +22,30 @@ public class m3CellClick : MonoBehaviour
     void Update()
     {
 
-            if (actionM3Click.second != null)
-        if (actionM3Click.second.gameObject != null)
+        if (actionM3Click.second != null)
+            if (actionM3Click.second.gameObject != null)
                 if (moveCell.canmove && actionM3Click.second.position == actionM3Click.second.gameObject.transform.position)
-        {
-            bool val1 = ((actionM3Kill)actionM3Click.first.Actions["kill"]).check();
-            bool val2 = ((actionM3Kill)actionM3Click.second.Actions["kill"]).check();
+                {
+                    bool val1 = ((actionM3Kill)actionM3Click.first.Actions["kill"]).check();
+                    bool val2 = ((actionM3Kill)actionM3Click.second.Actions["kill"]).check();
 
-            if((!val1) &&(!val2))
-            {
-                ((actionM3Click)cell.Actions["click"]).undo();
-            }
-            else
-            {
-                    //Debug.Log("move ok");
-                ((actionM3Kill)actionM3Click.first.Actions["kill"]).Update();
-                ((actionM3Kill)actionM3Click.second.Actions["kill"]).Update();
+                    if ((!val1) && (!val2))
+                    {
+                        //Debug.Log("move not ok");
+                        ((actionM3Click)cell.Actions["click"]).undo();
+                    }
+                    else
+                    {
+                        //Debug.Log("move ok");
+                        ((actionM3Kill)actionM3Click.first.Actions["kill"]).Update();
+                        ((actionM3Kill)actionM3Click.second.Actions["kill"]).Update();
 
-                actionM3Click.first = null;
-                actionM3Click.second = null;
+                        actionM3Click.first = null;
+                        actionM3Click.second = null;
 
-            }
+                    }
 
-        }
+                }
 
     }
 
@@ -53,10 +54,15 @@ public class m3CellClick : MonoBehaviour
 
         if (moveCell.canmove && actionM3Click.second == null)
         {
-            string[] arg = new string[1];
-            arg[0] = "";
-            
-            ((actionM3Click)cell.Actions["click"]).go(arg);
+            if (cell == actionM3Click.first)
+                actionM3Click.first = null;
+            else
+            {
+                string[] arg = new string[1];
+                arg[0] = "";
+
+                ((actionM3Click)cell.Actions["click"]).go(arg);
+            }
         }
     }
 }

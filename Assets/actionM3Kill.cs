@@ -33,7 +33,6 @@ public class actionM3Kill : CellAction
             if(vertical + horizontal >= 4)
             {
                 GameObject go = ((m3BoardData)cell.board).spawnBonus(id, cell);
-                cell.gameObject = go;
             }
 
         }
