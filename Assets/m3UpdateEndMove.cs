@@ -29,7 +29,7 @@ public class m3UpdateEndMove : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (doUpdate && moveCell.canmove && cell != actionM3Click.first && cell != actionM3Click.second)
+        if (doUpdate && moveCell.canmove && actionM3Click.first == null && actionM3Click.second == null)
         {
             ((actionM3Kill)cell.Actions["kill"]).Update();
         }
