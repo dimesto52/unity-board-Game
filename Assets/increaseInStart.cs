@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class increaseInStart : MonoBehaviour
 {
+
+    public float speed
+    {
+        get
+        {
+            return this.GetComponent<moveCell>().speed;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        transform.localScale = Vector3.zero;
     }
 
     float TimeOver = 0;
@@ -17,7 +27,7 @@ public class increaseInStart : MonoBehaviour
     {
         if (TimeOver != 1.0f)
         {
-            TimeOver += Time.deltaTime;
+            TimeOver += Time.deltaTime* speed;
             if (TimeOver > 1.0f)
                 TimeOver = 1.0f;
             transform.localScale = TimeOver * Vector3.one;

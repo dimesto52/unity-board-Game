@@ -30,9 +30,17 @@ public class actionM3Kill : CellAction
 
             kill();
 
-            if(vertical + horizontal >= 4)
+            if (horizontal >= 4)
             {
-                GameObject go = ((m3BoardData)cell.board).spawnBonus(id, cell);
+                GameObject go = ((m3BoardData)cell.board).spawnBonus(id, cell, 0);
+            }
+            else if (vertical >= 4)
+            {
+                GameObject go = ((m3BoardData)cell.board).spawnBonus(id, cell, 1);
+            }
+            else if (vertical + horizontal >= 4)
+            {
+                GameObject go = ((m3BoardData)cell.board).spawnBonus(id, cell, 2);
             }
 
         }

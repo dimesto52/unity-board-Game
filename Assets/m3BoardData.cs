@@ -13,7 +13,7 @@ public class m3BoardData : BoardData
     int indexGem = 0;
 
 
-    public GameObject[] prefabBonusContain;
+    public bonusContain[] prefabBonusContain;
 
 
     new void Start()
@@ -137,9 +137,9 @@ public class m3BoardData : BoardData
 
         return go;
     }
-    public GameObject spawnBonus(int id, Cell c)
+    public GameObject spawnBonus(int id, Cell c , int type)
     {
-        GameObject go = GameObject.Instantiate(prefabBonusContain[id]);
+        GameObject go = GameObject.Instantiate(prefabBonusContain[type].prefab[id]);
         go.transform.position = c.position;
 
         if (go.GetComponent<cellLink>() == null)
@@ -161,6 +161,7 @@ public class m3BoardData : BoardData
             go.AddComponent<m3BonusBreak>();
         go.GetComponent<m3BonusBreak>().particul = particul;
         go.GetComponent<m3BonusBreak>().sound = soundbreak;
+        go.GetComponent<m3BonusBreak>().type = type;
 
         if (go.GetComponent<increaseInStart>() == null)
             go.AddComponent<increaseInStart>();
@@ -267,4 +268,10 @@ public class m3BoardData : BoardData
         }
         return true;
     }
+}
+
+[System.Serializable]
+public class bonusContain
+{
+    public GameObject[] prefab;
 }
