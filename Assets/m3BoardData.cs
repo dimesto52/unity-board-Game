@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class m3BoardData : BoardData
 {
-
+   
+    public Sprite selectedSprite;
+    public Sprite baseSprite;
 
     public GameObject particul;
     public GameObject soundbreak;
@@ -16,9 +18,23 @@ public class m3BoardData : BoardData
     public bonusContain[] prefabBonusContain;
 
 
+    private GameObject backContainer;
+    private GameObject gemsContainer;
+
     new void Start()
     {
         base.Start();
+
+        backContainer = new GameObject();
+        backContainer.name = "backContainer";
+        backContainer.transform.position = transform.position;
+        backContainer.transform.parent = transform;
+
+        gemsContainer = new GameObject();
+        gemsContainer.name = "backContainer";
+        gemsContainer.transform.position = transform.position;
+        gemsContainer.transform.parent = transform;
+
 
         foreach (Cell c in cells)
         {
@@ -45,12 +61,25 @@ public class m3BoardData : BoardData
                 int randid = validid[rand];
 
                 c.container.Set_idObj(randid);
-                c.position = transform.position + Vector3.up * (y - height / 2.0f) + Vector3.right * (x - width / 2.0f);
+                c.position = transform.position + Vector3.up * (y - (height-1) / 2.0f) + Vector3.right * (x - (width - 1) / 2.0f);
 
 
                 GameObject go = gemCreator(randid, c);
 
                 c.gameObject = go;
+
+                GameObject goBack =new GameObject();
+                goBack.name = "back" + "(" +x+ ";" +y+ ")";
+                goBack.transform.position = c.position - Vector3.back;
+
+                goBack.AddComponent<SpriteRenderer>();
+                goBack.AddComponent<cellLink>();
+                goBack.GetComponent<cellLink>().cell = c;
+                goBack.AddComponent<selectBack>();
+                goBack.GetComponent<selectBack>().selectedSprite = selectedSprite;
+                goBack.GetComponent<selectBack>().baseSprite = baseSprite;
+
+                goBack.transform.parent = backContainer.transform;
 
             }
     }
@@ -133,12 +162,23 @@ public class m3BoardData : BoardData
             go.AddComponent<increaseInStart>();
 
         go.name = "gem" + indexGem;
+        go.transform.parent = gemsContainer.transform;
         indexGem++;
 
         return go;
     }
     public GameObject spawnBonus(int id, Cell c , int type)
     {
+        if (type >= prefabBonusContain.Length)
+            type = prefabBonusContain.Length - 1;
+        if (type < 0)
+            type = 0;
+        if (id >= prefabBonusContain[type].prefab.Length)
+            id = prefabBonusContain[type].prefab.Length - 1;
+        if (id < 0)
+            id = 0;
+
+
         GameObject go = GameObject.Instantiate(prefabBonusContain[type].prefab[id]);
         go.transform.position = c.position;
 
@@ -167,6 +207,7 @@ public class m3BoardData : BoardData
             go.AddComponent<increaseInStart>();
 
         go.name = "gemBonus" + indexGem;
+        go.transform.parent = gemsContainer.transform;
         indexGem++;
         
         c.gameObject = go;

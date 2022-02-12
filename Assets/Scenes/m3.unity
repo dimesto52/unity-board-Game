@@ -163,7 +163,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -245,6 +245,10 @@ MonoBehaviour:
   - {fileID: 6785841088072236585, guid: 4428549aa8488074db13315242ddd968, type: 3}
   - {fileID: 572587810718624340, guid: cbcfcd48583d09b48831ac2ea9324f2f, type: 3}
   - {fileID: 2873399128836492330, guid: 0153d21bd35472c40bd648669226ce11, type: 3}
+  backgroundCell: {fileID: 4710569872069920497, guid: 6c85a69600885ac42b816322af94bf6d,
+    type: 3}
+  selectedSprite: {fileID: 21300000, guid: e0895b2289984a341853c4fd6dd89eb4, type: 3}
+  baseSprite: {fileID: 21300000, guid: 689611c9938b7f141bb846c5a5796195, type: 3}
   particul: {fileID: 8809966757340786746, guid: af51d23ca3286af4bb67ab4cb02993e8,
     type: 3}
   soundbreak: {fileID: 6636710701355125038, guid: b4257c1e57f1638499251538e2aa1e42,
