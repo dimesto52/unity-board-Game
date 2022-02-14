@@ -21,6 +21,9 @@ public class m3BoardData : BoardData
     private GameObject backContainer;
     private GameObject gemsContainer;
 
+
+    public static int allowTurn = 10;
+
     new void Start()
     {
         base.Start();
@@ -92,40 +95,41 @@ public class m3BoardData : BoardData
     {
         timeLeft += Time.deltaTime * speedStep;
 
-        if (timeLeft >= 1.0f + waitStep)
-        {
-            timeLeft -= 1.0f + waitStep;
-
-            foreach (Cell c in cells)
+        if (allowTurn > 0)
+            if (timeLeft >= 1.0f + waitStep)
             {
-                ((actionFall)c.Actions["Fall"]).Update();
-            }
+                timeLeft -= 1.0f + waitStep;
 
-            for (int x = 0; x < width; x++)
-            {
-                int y = this.height - 1;
-                Cell c = cells[x + y * width];
-                if (c.container.Get_idObj() == -1)
+                foreach (Cell c in cells)
                 {
+                    ((actionFall)c.Actions["Fall"]).Update();
+                }
 
-                    GameObject.Instantiate(soundpop, c.position, Quaternion.identity);
+                for (int x = 0; x < width; x++)
+                {
+                    int y = this.height - 1;
+                    Cell c = cells[x + y * width];
+                    if (c.container.Get_idObj() == -1)
+                    {
+
+                        GameObject.Instantiate(soundpop, c.position, Quaternion.identity);
 
 
-                    int[] validid = gemValid(c);
-                    int rand = Random.Range(0, validid.Length);
+                        int[] validid = gemValid(c);
+                        int rand = Random.Range(0, validid.Length);
 
-                    int randid = validid[rand];
-                    c.container.Set_idObj(randid);
+                        int randid = validid[rand];
+                        c.container.Set_idObj(randid);
 
-                    GameObject go = gemCreator(randid, c);
+                        GameObject go = gemCreator(randid, c);
 
-                    go.transform.position += Vector3.up;
+                        go.transform.position += Vector3.up;
 
-                    c.gameObject = go;
+                        c.gameObject = go;
 
+                    }
                 }
             }
-        }
 
         foreach (Cell c in cells)
         {

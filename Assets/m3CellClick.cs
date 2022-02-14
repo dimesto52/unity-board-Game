@@ -43,6 +43,9 @@ public class m3CellClick : MonoBehaviour
                         actionM3Click.first = null;
                         actionM3Click.second = null;
 
+                        if (m3BoardData.allowTurn > 0)
+                            m3BoardData.allowTurn--;
+
                     }
 
                 }
@@ -52,17 +55,18 @@ public class m3CellClick : MonoBehaviour
     private void OnMouseDown()
     {
 
-        if (moveCell.canmove && actionM3Click.second == null)
-        {
-            if (cell == actionM3Click.first)
-                actionM3Click.first = null;
-            else
+        if (m3BoardData.allowTurn > 0)
+            if (moveCell.canmove && actionM3Click.second == null)
             {
-                string[] arg = new string[1];
-                arg[0] = "";
+                if (cell == actionM3Click.first)
+                    actionM3Click.first = null;
+                else
+                {
+                    string[] arg = new string[1];
+                    arg[0] = "";
 
-                ((actionM3Click)cell.Actions["click"]).go(arg);
+                    ((actionM3Click)cell.Actions["click"]).go(arg);
+                }
             }
-        }
     }
 }
