@@ -53,6 +53,7 @@ public class actionM3Kill : CellAction
     {
         if (cell.gameObject != null)
             cell.gameObject.SendMessage("Onbreak");
+
         cell.container.Set_idObj(-1);
         cell.gameObject = null;
     }

@@ -40,6 +40,11 @@ public class m3BonusBreak : MonoBehaviour
 
             GameObject.Instantiate(particul, transform.position, transform.rotation);
             GameObject.Instantiate(sound, transform.position, transform.rotation);
+
+            needTo score = GameObject.FindObjectOfType<needTo>();
+            if (score != null)
+                score.onbreak(cell.container.Get_idObj(), type);
+
             cell.container.Set_idObj(-1);
             GameObject.Destroy(this.gameObject);
 
