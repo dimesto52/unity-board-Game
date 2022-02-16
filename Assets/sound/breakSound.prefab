@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6636710701355125024}
   - component: {fileID: 6636710701355125025}
   - component: {fileID: 3858308799351755190}
+  - component: {fileID: 3520185406185518569}
   m_Layer: 0
   m_Name: breakSound
   m_TagString: Untagged
@@ -140,3 +141,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c4e2ce2a2e99d4d8b5ccd12f3e5cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimeOver: 2
+--- !u!114 &3520185406185518569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6636710701355125038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1775e1c8d9d57a40888da3e8b30540f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 6e0b6f98de995f84282780b5a08e7d78, type: 3}
+  - {fileID: 8300000, guid: 6bf4e86c38ef78f4084b77a160beee35, type: 3}
+  - {fileID: 8300000, guid: 771af03aee6bd264b95435da2abfcfb0, type: 3}
+  - {fileID: 8300000, guid: 57732c27f2ab38d4c93bf6817e8533a4, type: 3}
+  - {fileID: 8300000, guid: ff2b470b92438a347a90fade4a0d2fab, type: 3}
+  - {fileID: 8300000, guid: f8784378981138549ba82617efbf2c0a, type: 3}
+  - {fileID: 8300000, guid: 979a89aed9d1e2f4fb151caa8f76a408, type: 3}
+  - {fileID: 8300000, guid: d4c107ba61b2d524194a6e9176f4e764, type: 3}
+  - {fileID: 8300000, guid: 0c42470eb710eee419662ff3bc57ffdc, type: 3}

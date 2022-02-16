@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3854032465398352378}
   - component: {fileID: 3854032465398352373}
   - component: {fileID: 995429926040404898}
+  - component: {fileID: 114564822305676110}
   m_Layer: 0
   m_Name: popSound
   m_TagString: Untagged
@@ -141,3 +142,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeOver: 2
+--- !u!114 &114564822305676110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3854032465398352372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1775e1c8d9d57a40888da3e8b30540f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: da6071060edb7df4eb1b90a1ae3ae43a, type: 3}
+  - {fileID: 8300000, guid: 57d9f261c859fab4091fba292b991a9b, type: 3}
+  - {fileID: 8300000, guid: 6dc37fa20eaba7548a60bc80597e5f2f, type: 3}
+  - {fileID: 8300000, guid: 666a5ded606a1aa4787242ad776575a5, type: 3}
+  - {fileID: 8300000, guid: b49387f286bbdea4cae7eb0a67a5f7f2, type: 3}
+  - {fileID: 8300000, guid: 217bc9a9789ab1c44a905cc07cb28906, type: 3}
+  - {fileID: 8300000, guid: 4d1f290525488a44db30ec583d52c7f3, type: 3}
+  - {fileID: 8300000, guid: 71ee2fb9dd2dfe346bb6bd59012897ee, type: 3}
+  - {fileID: 8300000, guid: 1c42d6747bd239e49ace49aed7594e8b, type: 3}
