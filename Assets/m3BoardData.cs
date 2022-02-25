@@ -26,7 +26,13 @@ public class m3BoardData : BoardData
 
     new void Start()
     {
-        base.Start();
+        this.generate();
+
+        if (backContainer == null) generateBrefab();
+
+    }
+    public void generateBrefab()
+    {
 
         backContainer = new GameObject();
         backContainer.name = "backContainer";
@@ -34,45 +40,28 @@ public class m3BoardData : BoardData
         backContainer.transform.parent = transform;
 
         gemsContainer = new GameObject();
-        gemsContainer.name = "backContainer";
+        gemsContainer.name = "gemsContainer";
         gemsContainer.transform.position = transform.position;
         gemsContainer.transform.parent = transform;
 
 
-        foreach (Cell c in cells)
-        {
-
-            c.container = new breakCellContainer();
-            c.container.Set_idObj(-1);
-            c.Actions.Add("click", new actionM3Click());
-            c.Actions["click"].cell = c;
-            c.Actions.Add("Fall", new actionFall());
-            c.Actions["Fall"].cell = c;
-            c.Actions.Add("kill", new actionM3Kill());
-            c.Actions["kill"].cell = c;
-
-        }
-
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
             {
+
                 Cell c = getCell(x, y);
 
                 int[] validid = gemValid(c);
                 int rand = Random.Range(0, validid.Length);
-
                 int randid = validid[rand];
 
-                c.container.Set_idObj(randid);
-                c.position = transform.position + Vector3.up * (y - (height-1) / 2.0f) + Vector3.right * (x - (width - 1) / 2.0f);
-
-
                 GameObject go = gemCreator(randid, c);
+                c.container.Set_idObj(randid);
 
                 c.gameObject = go;
 
-                GameObject goBack =new GameObject();
-                goBack.name = "back" + "(" +x+ ";" +y+ ")";
+                GameObject goBack = new GameObject();
+                goBack.name = "back" + "(" + x + ";" + y + ")";
                 goBack.transform.position = c.position - Vector3.back;
 
                 goBack.AddComponent<SpriteRenderer>();
@@ -83,7 +72,31 @@ public class m3BoardData : BoardData
                 goBack.GetComponent<selectBack>().baseSprite = baseSprite;
 
                 goBack.transform.parent = backContainer.transform;
+            }
+    }
+    public new void generate()
+    {
 
+        //if (cells.Length == 0)
+            base.generate();
+
+        for (int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++)
+            {
+                Cell c = getCell(x, y);
+                c.container = new breakCellContainer();
+                c.container.Set_idObj(-1);
+                if(!c.Actions.ContainsKey("click"))
+                c.Actions.Add("click", new actionM3Click());
+                c.Actions["click"].cell = c;
+                if (!c.Actions.ContainsKey("Fall"))
+                    c.Actions.Add("Fall", new actionFall());
+                c.Actions["Fall"].cell = c;
+                if (!c.Actions.ContainsKey("kill"))
+                    c.Actions.Add("kill", new actionM3Kill());
+                c.Actions["kill"].cell = c;
+
+                c.position = transform.position + Vector3.up * (y - (height - 1) / 2.0f) + Vector3.right * (x - (width - 1) / 2.0f);
             }
     }
 
@@ -130,11 +143,6 @@ public class m3BoardData : BoardData
                     }
                 }
             }
-
-        foreach (Cell c in cells)
-        {
-            c.debug();
-        }
     }
 
     GameObject gemCreator(int id, Cell c)

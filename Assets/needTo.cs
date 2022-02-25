@@ -21,8 +21,9 @@ public class needTo : MonoBehaviour
         foreach(gemCount gem in gemNeed)
         {
             GameObject go = GameObject.Instantiate(entryList);
-            go.transform.parent = listneed.transform;
-            go.transform.localScale = Vector3.one;
+            
+            go.GetComponent<RectTransform>().parent = listneed.GetComponent<RectTransform>();
+            go.GetComponent<RectTransform>().localScale = Vector3.one;
 
             if (go.GetComponent<needEntryData>() == null)
                 go.AddComponent<needEntryData>();

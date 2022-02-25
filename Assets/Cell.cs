@@ -33,9 +33,21 @@ public class Cell
         if(gameObject!=null)
             Debug.DrawLine(position, gameObject.transform.position, Color.green);*/
 
-        if(down != null)
+        if (down != null)
         {
             Debug.DrawLine(position, down.position, Color.red);
+        }
+        if (up != null)
+        {
+            Debug.DrawLine(position, up.position, Color.green);
+        }
+        if (left != null)
+        {
+            Debug.DrawLine(position, left.position, Color.yellow);
+        }
+        if (right != null)
+        {
+            Debug.DrawLine(position, right.position, Color.yellow);
         }
     }
 

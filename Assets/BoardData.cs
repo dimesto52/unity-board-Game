@@ -13,6 +13,12 @@ public class BoardData : MonoBehaviour
 
     public void Start()
     {
+        if (cells.Length == 0)
+        generate();
+
+    }
+    public void generate()
+    {
         cells = new Cell[height * width];
 
         for (int x = 0; x < width; x++)
@@ -20,7 +26,7 @@ public class BoardData : MonoBehaviour
             {
                 setCell(x, y, new Cell());
                 getCell(x, y).board = this;
-                getCell(x, y).debugName = x.ToString() + " : " + y.ToString();
+                getCell(x, y).debugName = "("+x.ToString() + " : " + y.ToString()+")";
                 if (x > 0)
                 {
                     getCell(x, y).left = getCell((x - 1), y);
