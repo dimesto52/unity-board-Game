@@ -13,3 +13,13 @@ MonoBehaviour:
   m_Name: gem1
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
+  bonusList:
+  - type: 0
+    minval: 5
+    prefab: {fileID: 0}
+  - type: 1
+    minval: 5
+    prefab: {fileID: 0}
+  - type: 2
+    minval: 5
+    prefab: {fileID: 0}

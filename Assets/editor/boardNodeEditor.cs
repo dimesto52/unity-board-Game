@@ -21,17 +21,15 @@ public class boardNodeEditor : EditorWindow
         if (boardEditor.selectedCell != null)
         {
             this.Repaint();
-            
-            boardEditor.selectedCell.debug();
-            Debug.Log(boardEditor.selectedCell.up);
+
         }
     }
 
     // Update is called once per frame
     void OnGUI()
     {
-        
-        if(boardEditor.selectedCell != null)
+
+        if (boardEditor.selectedCell != null)
         {
             GUILayout.BeginHorizontal();
             GUILayout.Label("Node : ", EditorStyles.boldLabel);
@@ -75,27 +73,27 @@ public class boardNodeEditor : EditorWindow
 
             GUILayout.BeginHorizontal();
 
-                GUILayout.BeginHorizontal();
-                    GUILayout.Label("add node : ", EditorStyles.boldLabel);
-                GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("add node : ", EditorStyles.boldLabel);
+            GUILayout.EndHorizontal();
 
-                GUILayout.BeginVertical();
-                    GUILayout.BeginHorizontal();
-                        GUILayout.Label(" ", GUILayout.Width(20));
-                        GUILayout.Button("+", GUILayout.Width(20));
-                        GUILayout.Label(" ", GUILayout.Width(20));
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal();
-                        GUILayout.Button("+", GUILayout.Width(20));
-                        GUILayout.Label(" ", GUILayout.Width(20));
-                        GUILayout.Button("+", GUILayout.Width(20));
-                    GUILayout.EndHorizontal();
-                    GUILayout.BeginHorizontal();
-                        GUILayout.Label(" ", GUILayout.Width(20));
-                        GUILayout.Button("+", GUILayout.Width(20));
-                        GUILayout.Label(" ", GUILayout.Width(20));
-                    GUILayout.EndHorizontal();
-                GUILayout.EndVertical();
+            GUILayout.BeginVertical();
+                GUILayout.BeginHorizontal();
+                    GUILayout.Label(" ", GUILayout.Width(20));
+                    if(GUILayout.Button("+", GUILayout.Width(20))) addUp(boardEditor.selectedCell);
+                    GUILayout.Label(" ", GUILayout.Width(20));
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                    if (GUILayout.Button("+", GUILayout.Width(20))) addLeft(boardEditor.selectedCell);
+                    GUILayout.Label(" ", GUILayout.Width(20));
+                    if (GUILayout.Button("+", GUILayout.Width(20))) addRight(boardEditor.selectedCell);
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                    GUILayout.Label(" ", GUILayout.Width(20));
+                    if (GUILayout.Button("+", GUILayout.Width(20))) addDown(boardEditor.selectedCell);
+                    GUILayout.Label(" ", GUILayout.Width(20));
+                GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
             GUILayout.EndHorizontal();
 
         }
@@ -103,5 +101,58 @@ public class boardNodeEditor : EditorWindow
         {
             GUILayout.Label("no node selected");
         }
+    }
+
+    void addUp(Cell c)
+    {
+        Vector2 vect = new Vector2(c.pos.x, c.pos.y + 1);
+
+        c.boardO.addcell((int)vect.x, (int)vect.y);
+        boardEditor.selectedCell = c.boardO.getcell((int)vect.x, (int)vect.y);
+
+        EditorUtility.SetDirty(c.boardO);
+
+        SceneView.RepaintAll();
+        EditorWindow.GetWindow<SceneView>().Repaint();
+        HandleUtility.Repaint();
+    }
+    void addDown(Cell c)
+    {
+        Vector2 vect = new Vector2(c.pos.x, c.pos.y - 1);
+
+        c.boardO.addcell((int)vect.x, (int)vect.y);
+        boardEditor.selectedCell = c.boardO.getcell((int)vect.x, (int)vect.y);
+
+        EditorUtility.SetDirty(c.boardO);
+
+        SceneView.RepaintAll();
+        EditorWindow.GetWindow<SceneView>().Repaint();
+        HandleUtility.Repaint();
+    }
+    void addLeft(Cell c)
+    {
+        Vector2 vect = new Vector2(c.pos.x - 1, c.pos.y);
+
+        c.boardO.addcell((int)vect.x, (int)vect.y);
+        boardEditor.selectedCell = c.boardO.getcell((int)vect.x, (int)vect.y);
+
+        EditorUtility.SetDirty(c.boardO);
+
+        SceneView.RepaintAll();
+        EditorWindow.GetWindow<SceneView>().Repaint();
+        HandleUtility.Repaint();
+    }
+    void addRight(Cell c)
+    {
+        Vector2 vect = new Vector2(c.pos.x + 1, c.pos.y);
+
+        c.boardO.addcell((int)vect.x, (int)vect.y);
+        boardEditor.selectedCell = c.boardO.getcell((int)vect.x, (int)vect.y);
+
+        EditorUtility.SetDirty(c.boardO);
+
+        SceneView.RepaintAll();
+        EditorWindow.GetWindow<SceneView>().Repaint();
+        HandleUtility.Repaint();
     }
 }

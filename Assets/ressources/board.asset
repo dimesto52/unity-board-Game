@@ -12,45 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052b6573032d0b64e9bf329ffc66db8f, type: 3}
   m_Name: board
   m_EditorClassIdentifier: 
-  nodes:
-  - debugName: 
-    position: {x: 0, y: 0, z: 0}
-    board: {fileID: 0}
-    gameObject: {fileID: 0}
-  - debugName: 
-    position: {x: 0, y: 0, z: 0}
-    board: {fileID: 0}
-    gameObject: {fileID: 0}
-  - debugName: 
-    position: {x: 0, y: 0, z: 0}
-    board: {fileID: 0}
-    gameObject: {fileID: 0}
-  - debugName: 
-    position: {x: 0, y: 0, z: 0}
-    board: {fileID: 0}
-    gameObject: {fileID: 0}
-  - debugName: 
-    position: {x: 0, y: 0, z: 0}
-    board: {fileID: 0}
-    gameObject: {fileID: 0}
-  - debugName: 
-    position: {x: 0, y: 0, z: 0}
-    board: {fileID: 0}
-    gameObject: {fileID: 0}
-  - debugName: 
-    position: {x: 0, y: 0, z: 0}
-    board: {fileID: 0}
-    gameObject: {fileID: 0}
-  - debugName: 
-    position: {x: 0, y: 0, z: 0}
-    board: {fileID: 0}
-    gameObject: {fileID: 0}
-  - debugName: 
-    position: {x: 0, y: 0, z: 0}
-    board: {fileID: 0}
-    gameObject: {fileID: 0}
-  - debugName: 
-    position: {x: 0, y: 0, z: 0}
-    board: {fileID: 0}
-    gameObject: {fileID: 0}
-  spawnObject: []
+  nodes: []
+  validObjectId:
+  - {fileID: 11400000, guid: dab785ba6387678418ff6fd3eb885fb2, type: 2}
+  - {fileID: 11400000, guid: 07856138fc0160540ae70f65b68a0c10, type: 2}
+  - {fileID: 11400000, guid: 16a1c31205db72841a445e0649acbddf, type: 2}
+  - {fileID: 11400000, guid: 3ccb8b8e42e92a34cbf2320b5a14e127, type: 2}

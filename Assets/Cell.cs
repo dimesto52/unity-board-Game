@@ -7,9 +7,20 @@ public class Cell
 {
 
     public string debugName;
-    public Vector3 position;
+    public Vector3 position = Vector3.zero;
+    public Vector3 pos
+    {
+        get
+        {
+            if (position == null)
+                return Vector3.zero;
+            else
+                return position;
+        }
+    }
 
     public BoardData board;
+    public boardObject boardO;
 
     public Cell()
     {

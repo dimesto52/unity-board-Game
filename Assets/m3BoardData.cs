@@ -97,6 +97,8 @@ public class m3BoardData : BoardData
                 c.Actions["kill"].cell = c;
 
                 c.position = transform.position + Vector3.up * (y - (height - 1) / 2.0f) + Vector3.right * (x - (width - 1) / 2.0f);
+                
+                getCell(x, y).board = this;
             }
     }
 
@@ -115,13 +117,14 @@ public class m3BoardData : BoardData
 
                 foreach (Cell c in cells)
                 {
-                    ((actionFall)c.Actions["Fall"]).Update();
+                    if(c.Actions.ContainsKey("Fall"))
+                        ((actionFall)c.Actions["Fall"]).Update();
                 }
-
+                
                 for (int x = 0; x < width; x++)
                 {
                     int y = this.height - 1;
-                    Cell c = cells[x + y * width];
+                    Cell c = base.getCell(x,y);
                     if (c.container.Get_idObj() == -1)
                     {
 

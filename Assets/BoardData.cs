@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BoardData : MonoBehaviour
 {
+
+    public boardObject obj;
+
     public Cell[] cells;
 
     public int height = 1;
@@ -25,7 +28,6 @@ public class BoardData : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 setCell(x, y, new Cell());
-                getCell(x, y).board = this;
                 getCell(x, y).debugName = "("+x.ToString() + " : " + y.ToString()+")";
                 if (x > 0)
                 {
@@ -43,7 +45,16 @@ public class BoardData : MonoBehaviour
     }
     public Cell getCell(int x , int y)
     {
+        //return obj.getcell(x, y);
+
         return cells[x + y * width];
+    }
+    public void addCell(int x, int y)
+    {
+        if (obj == null)
+            Debug.Log("no object");
+        else
+            obj.addcell(x, y);
     }
     public void setCell(int x , int y, Cell c)
     {
