@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "board", menuName = "board/boardObject", order = 1)]
-public class boardObject : ScriptableObject
+[System.Serializable]
+public class tableIntContainer
 {
-
-    //public Dictionary<int, rowBoardObject> rows;
     [HideInInspector]
     public List<int> rowsIndex;
-    public List<rowBoardObject> rows;
+    public List<rowBoardInt> rows;
 
     public int rowCount
     {
@@ -18,79 +16,100 @@ public class boardObject : ScriptableObject
             if (rows == null)
             {
                 rowsIndex = new List<int>();
-                rows = new List<rowBoardObject>();
+                rows = new List<rowBoardInt>();
             }
 
             return rows.Count;
         }
     }
 
-    public boardGemObject[] validObjectId;
-
-    public Cell getcell(int x ,int y)
+    public int getcell(int x, int y)
     {
         if (rows == null)
         {
             rowsIndex = new List<int>();
-            rows = new List<rowBoardObject>();
+            rows = new List<rowBoardInt>();
         }
 
         if (!rowsIndex.Contains(x))
         {
             rowsIndex.Add(x);
-            rows.Add(new rowBoardObject());
+            rows.Add(new rowBoardInt());
         }
 
         int index = rowsIndex.LastIndexOf(x);
 
         return rows[index].get(y);
     }
-    public void addcell(int x ,int y)
+    public void setcell(int x, int y, int val)
     {
-
         if (rows == null)
         {
             rowsIndex = new List<int>();
-            rows = new List<rowBoardObject>();
+            rows = new List<rowBoardInt>();
         }
 
         if (!rowsIndex.Contains(x))
         {
             rowsIndex.Add(x);
-            rows.Add(new rowBoardObject());
+            rows.Add(new rowBoardInt());
         }
 
         int index = rowsIndex.LastIndexOf(x);
 
-        rows[index].add(y);
-        rows[index].get(y).boardO = this;
-        rows[index].get(y).position = new Vector3(x,y);
+        rows[index].set(y, val);
     }
-    public void remove(int x ,int y)
+    public void addcell(int x, int y, int val)
     {
 
         if (rows == null)
         {
             rowsIndex = new List<int>();
-            rows = new List<rowBoardObject>();
+            rows = new List<rowBoardInt>();
         }
 
         if (!rowsIndex.Contains(x))
         {
             rowsIndex.Add(x);
-            rows.Add(new rowBoardObject());
+            rows.Add(new rowBoardInt());
+        }
+
+        int index = rowsIndex.LastIndexOf(x);
+
+        rows[index].add(y, val);
+    }
+    public void remove(int x, int y)
+    {
+
+        if (rows == null)
+        {
+            rowsIndex = new List<int>();
+            rows = new List<rowBoardInt>();
+        }
+
+        if (!rowsIndex.Contains(x))
+        {
+            rowsIndex.Add(x);
+            rows.Add(new rowBoardInt());
         }
 
         int index = rowsIndex.LastIndexOf(x);
 
         rows[index].remove(y);
+
+        if (rows[index].cols.Count == 0)
+        {
+            rowsIndex.Remove(x);
+            rows.Remove(rows[index]);
+        }
+
     }
     public void clearCell()
     {
         if (rows == null)
         {
             rowsIndex = new List<int>();
-            rows = new List<rowBoardObject>();
+            rows = new List<rowBoardInt>();
         }
 
         rowsIndex.Clear();
@@ -100,13 +119,13 @@ public class boardObject : ScriptableObject
 }
 
 [System.Serializable]
-public class rowBoardObject
+public class rowBoardInt
 {
     //public Dictionary<int, Cell> cols;
 
     [HideInInspector]
     public List<int> colsIndex;
-    public List<Cell> cols;
+    public List<int> cols;
 
     public int colCount
     {
@@ -115,40 +134,55 @@ public class rowBoardObject
             if (cols == null)
             {
                 colsIndex = new List<int>();
-                cols = new List<Cell>();
+                cols = new List<int>();
             }
 
             return cols.Count;
         }
     }
 
-    public Cell get(int y)
+    public int get(int y)
     {
 
         if (cols == null)
         {
             colsIndex = new List<int>();
-            cols = new List<Cell>();
+            cols = new List<int>();
         }
 
         if (!colsIndex.Contains(y))
-            return null;
+            return -1;
 
         int index = colsIndex.LastIndexOf(y);
         return cols[index];
     }
-    public void add(int y)
+    public void set(int y, int val)
+    {
+
+        if (cols == null)
+        {
+            colsIndex = new List<int>();
+            cols = new List<int>();
+        }
+
+        if (!colsIndex.Contains(y))
+            add(y, val);
+
+        int index = colsIndex.LastIndexOf(y);
+        cols[index] = val;
+    }
+    public void add(int y, int val)
     {
         if (cols == null)
         {
             colsIndex = new List<int>();
-            cols = new List<Cell>();
+            cols = new List<int>();
         }
 
         if (!colsIndex.Contains(y))
         {
             colsIndex.Add(y);
-            cols.Add(new Cell());
+            cols.Add(val);
         }
     }
     public void remove(int y)
@@ -156,7 +190,7 @@ public class rowBoardObject
         if (cols == null)
         {
             colsIndex = new List<int>();
-            cols = new List<Cell>();
+            cols = new List<int>();
         }
 
         if (colsIndex.Contains(y))

@@ -5,7 +5,9 @@ using UnityEngine;
 public class BoardData : MonoBehaviour
 {
 
-    public boardObject obj;
+    public tableIntContainer container;
+    public boardShape obj;
+    public boardValueInt initValue;
 
     public Cell[] cells;
 

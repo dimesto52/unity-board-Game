@@ -12,7 +12,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052b6573032d0b64e9bf329ffc66db8f, type: 3}
   m_Name: board
   m_EditorClassIdentifier: 
-  nodes: []
+  rowsIndex: 00000000ffffffff01000000fefffffff7ffffff02000000
+  rows:
+  - colsIndex: 0000000001000000ffffffff
+    cols:
+    - debugName: 
+      position: {x: 0, y: 0, z: 0}
+      board: {fileID: 0}
+      boardO: {fileID: 11400000}
+      gameObject: {fileID: 0}
+    - debugName: 
+      position: {x: 0, y: 1, z: 0}
+      board: {fileID: 0}
+      boardO: {fileID: 11400000}
+      gameObject: {fileID: 0}
+    - debugName: 
+      position: {x: 0, y: -1, z: 0}
+      board: {fileID: 0}
+      boardO: {fileID: 11400000}
+      gameObject: {fileID: 0}
+  - colsIndex: ffffffff0100000000000000
+    cols:
+    - debugName: 
+      position: {x: -1, y: -1, z: 0}
+      board: {fileID: 0}
+      boardO: {fileID: 11400000}
+      gameObject: {fileID: 0}
+    - debugName: 
+      position: {x: -1, y: 1, z: 0}
+      board: {fileID: 0}
+      boardO: {fileID: 11400000}
+      gameObject: {fileID: 0}
+    - debugName: 
+      position: {x: -1, y: 0, z: 0}
+      board: {fileID: 0}
+      boardO: {fileID: 11400000}
+      gameObject: {fileID: 0}
+  - colsIndex: 01000000ffffffff00000000
+    cols:
+    - debugName: 
+      position: {x: 1, y: 1, z: 0}
+      board: {fileID: 0}
+      boardO: {fileID: 11400000}
+      gameObject: {fileID: 0}
+    - debugName: 
+      position: {x: 1, y: -1, z: 0}
+      board: {fileID: 0}
+      boardO: {fileID: 11400000}
+      gameObject: {fileID: 0}
+    - debugName: 
+      position: {x: 1, y: 0, z: 0}
+      board: {fileID: 0}
+      boardO: {fileID: 11400000}
+      gameObject: {fileID: 0}
+  - colsIndex: 
+    cols: []
+  - colsIndex: 
+    cols: []
+  - colsIndex: 
+    cols: []
   validObjectId:
   - {fileID: 11400000, guid: dab785ba6387678418ff6fd3eb885fb2, type: 2}
   - {fileID: 11400000, guid: 07856138fc0160540ae70f65b68a0c10, type: 2}

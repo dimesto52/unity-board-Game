@@ -48,34 +48,37 @@ public class boardEditor : Editor
             Debug.Log(board.obj.rows.Count);
         }
 
+        if(board.obj != null)
         for (int x = 0; x < board.obj.rowCount; x++)
-            for (int y = 0; y < board.obj.rows[x].colCount; y++)
+            for (int y = 0; y < board.obj.rows[x].cols.Count; y++)
             {
                 float size;
-                Cell c = board.obj.getcell(x, y);
-                Vector3 pos = c.position;
-                size = HandleUtility.GetHandleSize(pos);
-                HandleUtility.GetHandleSize(Vector3.one);
-
-                controlId = GUIUtility.GetControlID(FocusType.Passive);
-
-                if (selectedCell == c)
-                    Handles.color = Color.red;
-                else
-                    Handles.color = Color.white;
-
-                Handles.FreeMoveHandle(controlId, pos, Quaternion.identity, 0.25f, pos, Handles.SphereHandleCap);
-
-                Handles.Label(pos, c.pos.ToString());
-
-                if (controlId == GUIUtility.hotControl)
+                Cell c = null;// board.obj.getcell(x, y);
+                if (c != null)
                 {
-                    //Debug.Log("The button was pressed! at " + board.cells[i].debugName);
-                    selectedCell = c;
+                    Vector3 pos = c.position;
+                    size = HandleUtility.GetHandleSize(pos);
+                    HandleUtility.GetHandleSize(Vector3.one);
+
+                    controlId = GUIUtility.GetControlID(FocusType.Passive);
+
+                    if (selectedCell == c)
+                        Handles.color = Color.red;
+                    else
+                        Handles.color = Color.white;
+
+                    Handles.FreeMoveHandle(controlId, pos, Quaternion.identity, 0.25f, pos, Handles.SphereHandleCap);
+
+                    Handles.Label(pos, c.pos.ToString());
+
+                    if (controlId == GUIUtility.hotControl)
+                    {
+                        //Debug.Log("The button was pressed! at " + board.cells[i].debugName);
+                        selectedCell = c;
+
+                    }
 
                 }
-
-            }
                 if (boardEditor.selectedCell != null)
                 {
                     boardEditor.selectedCell.debug();
@@ -83,6 +86,7 @@ public class boardEditor : Editor
                     EditorUtility.SetDirty(board);
                     SceneView.RepaintAll();
                 }
+            }
         Handles.color = Color.white;
     }
 }
