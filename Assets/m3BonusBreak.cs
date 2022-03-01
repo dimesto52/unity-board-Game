@@ -5,29 +5,14 @@ using UnityEngine;
 public class m3BonusBreak : MonoBehaviour
 {
 
-    public Cell cell
+    public cellLink cell
     {
         get
         {
-            return this.GetComponent<cellLink>().cell;
+            return this.GetComponent<cellLink>();
         }
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public GameObject particul;
-    public GameObject sound;
-
+    
     public int type;
 
     public bool alreadyDestroy = false;
@@ -36,129 +21,103 @@ public class m3BonusBreak : MonoBehaviour
     {
         if (!alreadyDestroy)
         {
+        //Debug.Log("booom !");
             alreadyDestroy = true;
 
-            GameObject.Instantiate(particul, transform.position, transform.rotation);
-            GameObject.Instantiate(sound, transform.position, transform.rotation);
-
-            needTo score = GameObject.FindObjectOfType<needTo>();
-            if (score != null)
-                score.onbreak(cell.container.Get_idObj(), type);
-
-            cell.container.Set_idObj(-1);
-            GameObject.Destroy(this.gameObject);
-
-
-            if (type == 0)
+            switch (type)
             {
-                Cell curcell = null;
-                curcell = cell.left;
-                while (curcell != null)
-                {
-                    if (curcell.gameObject != null)
-                        curcell.gameObject.SendMessage("Onbreak");
-                    curcell = curcell.left;
-                }
-
-                curcell = cell.right;
-                while (curcell != null)
-                {
-                    if (curcell.gameObject != null)
-                        curcell.gameObject.SendMessage("Onbreak");
-                    curcell = curcell.right;
-                }
+                case 0:
+                    killHorizontal(cell.pos);
+                    break;
+                case 1:
+                    killVertical(cell.pos);
+                    break;
+                case 2:
+                    killCross(cell.pos);
+                    break;
             }
-            else if (type == 1)
+
+        }
+    }
+
+    public void killobj(Vector2 pos)
+    {
+
+        GameObject go = cell.board.gocontainer.getcell(pos);
+        if (go != null)
+            go.SendMessage("Onbreak");
+
+        //Debug.Log("kill " + pos + " !");
+
+    }
+
+    private void killAll(Vector2 pos)
+    {
+        foreach (int x in cell.board.container.rowsIndex)
+        {
+            int indexX = cell.board.container.rowsIndex.IndexOf(x);
+            foreach (int y in cell.board.container.rows[indexX].colsIndex)
             {
-                Cell curcell = null;
-                curcell = cell.up;
-                while (curcell != null)
-                {
-                    if (curcell.gameObject != null)
-                        curcell.gameObject.SendMessage("Onbreak");
-                    curcell = curcell.up;
-                }
-
-                curcell = cell.down;
-                while (curcell != null)
-                {
-                    if (curcell.gameObject != null)
-                        curcell.gameObject.SendMessage("Onbreak");
-                    curcell = curcell.down;
-                }
+                killobj(new Vector2(x, y));
             }
-            else if (type == 2)
+        }
+    }
+
+    private void killCross(Vector2 pos)
+    {
+        killLeft(pos);
+        killRight(pos);
+        killDown(pos);
+        killUp(pos);
+        //Debug.Log("killCross !");
+    }
+
+    private void killHorizontal(Vector2 pos)
+    {
+        killLeft(pos);
+        killRight(pos);
+        //Debug.Log("killHorizontal !");
+    }
+    private void killVertical(Vector2 pos)
+    {
+        killDown(pos);
+        killUp(pos);
+        //Debug.Log("killVertical !");
+    }
+
+    public void killLeft(Vector2 pos)
+    {
+        killDir(pos, Vector2.left);
+    }
+    public void killRight(Vector2 pos)
+    {
+        killDir(pos, Vector2.right);
+    }
+    public void killUp(Vector2 pos)
+    {
+        killDir(pos, Vector2.up);
+    }
+    public void killDown(Vector2 pos)
+    {
+        killDir(pos, Vector2.down);
+    }
+
+    public void killDir(Vector2 pos, Vector2 Dir)
+    {
+        int i = cell.board.container.getcell(pos);
+
+        int check = 1;
+        bool continuCheck = true;
+        while (continuCheck)
+        {
+            if (cell.board.obj.getcell(pos + Dir * check))
             {
-                Cell curcell1 = null;
-                curcell1 = cell.left;
-                while (curcell1 != null)
-                {
-                    if (curcell1.gameObject != null)
-                        curcell1.gameObject.SendMessage("Onbreak");
-
-                    Cell curcell = null;
-                    curcell = curcell1.up;
-                    while (curcell != null)
-                    {
-                        if (curcell.gameObject != null)
-                            curcell.gameObject.SendMessage("Onbreak");
-                        curcell = curcell.up;
-                    }
-
-                    curcell = curcell1.down;
-                    while (curcell != null)
-                    {
-                        if (curcell.gameObject != null)
-                            curcell.gameObject.SendMessage("Onbreak");
-                        curcell = curcell.down;
-                    }
-
-                    curcell1 = curcell1.left;
-                }
-
-                curcell1 = cell.right;
-                while (curcell1 != null)
-                {
-                    if (curcell1.gameObject != null)
-                        curcell1.gameObject.SendMessage("Onbreak");
-
-                    Cell curcell = null;
-                    curcell = curcell1.up;
-                    while (curcell != null)
-                    {
-                        if (curcell.gameObject != null)
-                            curcell.gameObject.SendMessage("Onbreak");
-                        curcell = curcell.up;
-                    }
-
-                    curcell = curcell1.down;
-                    while (curcell != null)
-                    {
-                        if (curcell.gameObject != null)
-                            curcell.gameObject.SendMessage("Onbreak");
-                        curcell = curcell.down;
-                    }
-
-                    curcell1 = curcell1.right;
-                }
-
-                Cell curcell2 = null;
-                curcell2 = cell.up;
-                while (curcell2 != null)
-                {
-                    if (curcell2.gameObject != null)
-                        curcell2.gameObject.SendMessage("Onbreak");
-                    curcell2 = curcell2.up;
-                }
-
-                curcell2 = cell.down;
-                while (curcell2 != null)
-                {
-                    if (curcell2.gameObject != null)
-                        curcell2.gameObject.SendMessage("Onbreak");
-                    curcell2 = curcell2.down;
-                }
+                    killobj(pos + Dir * check);
+                    //Debug.Log("check " + pos + " !");
             }
+            else
+                continuCheck = false;
+            check++;
         }
     }
 }

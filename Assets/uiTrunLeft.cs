@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class uiTrunLeft : MonoBehaviour
 {
 
+    public BoardData board;
     public Text txt
     {
         get
@@ -23,6 +24,6 @@ public class uiTrunLeft : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        txt.text = "Turn Left : " + m3BoardData.allowTurn;
+        txt.text = "Turn Left : " + board.alowMove;
     }
 }

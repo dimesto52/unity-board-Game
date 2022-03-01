@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c741d3685de32b34f9705c6534900b54, type: 3}
+  m_Name: boardShapeSpawn
+  m_EditorClassIdentifier: 
+  rowsIndex: 0000000001000000ffffffff02000000fefffffffdffffff03000000fcffffff04000000fbffffff05000000060000000700000008000000090000000a0000000b0000000d0000000c000000
+  rows:
+  - cols: 05000000
+  - cols: 04000000
+  - cols: 04000000
+  - cols: 03000000
+  - cols: 03000000
+  - cols: 02000000
+  - cols: 02000000
+  - cols: 01000000
+  - cols: 01000000
+  - cols: 00000000
+  - cols: 00000000
+  - cols: 
+  - cols: 
+  - cols: 
+  - cols: 
+  - cols: 
+  - cols: 
+  - cols: 
+  - cols: 

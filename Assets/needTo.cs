@@ -14,6 +14,8 @@ public class needTo : MonoBehaviour
 
     public GameObject win;
 
+    public gemSpawn board;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class needTo : MonoBehaviour
             if (go.GetComponent<needEntryData>() == null)
                 go.AddComponent<needEntryData>();
 
+            go.GetComponent<needEntryData>().board = board;
             go.GetComponent<needEntryData>().setdata(gem);
 
         }

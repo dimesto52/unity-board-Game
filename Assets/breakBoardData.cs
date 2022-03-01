@@ -11,12 +11,12 @@ public class breakBoardData : BoardData
     public GameObject soundbreak;
     public GameObject soundpop;
 
-    int indexGem = 0;
+    //int indexGem = 0;
 
     new void Start()
     {
         base.Start();
-
+        /*
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
             {
@@ -37,7 +37,7 @@ public class breakBoardData : BoardData
 
                 c.gameObject = go;
 
-            }
+            }*/
     }
 
     public float timeLeft = 0;
@@ -45,7 +45,7 @@ public class breakBoardData : BoardData
     public float waitStep = 0.05f;
 
     void Update()
-    {
+    {/*
         timeLeft += Time.deltaTime * speedStep;
 
         if (timeLeft >= 1.0f + waitStep)
@@ -84,12 +84,14 @@ public class breakBoardData : BoardData
         foreach (Cell c in cells)
         {
             c.debug();
-        }
+        }*/
     }
 
     GameObject gemCreator(int id, Cell c)
     {
-        GameObject go = GameObject.Instantiate(base.prefabCellContain[id]);
+        GameObject go = null; 
+        /*
+        go = GameObject.Instantiate(base.prefabCellContain[id]);
         go.transform.position = c.position;
 
         if (go.GetComponent<cellLink>() == null)
@@ -115,7 +117,7 @@ public class breakBoardData : BoardData
 
         go.name = "gem" + indexGem;
         indexGem++;
-
+        */
         return go;
     }
 }

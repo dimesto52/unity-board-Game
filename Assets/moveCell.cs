@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(cellLink))]
 public class moveCell : MonoBehaviour
 {
     public float speed = 2.0f;
-    public Cell cell
+    public bool update = true;
+    public cellLink cell
     {
         get
         {
-            return this.GetComponent<cellLink>().cell;
+            return this.GetComponent<cellLink>();
         }
     }
 
@@ -23,12 +25,7 @@ public class moveCell : MonoBehaviour
             return (hasmove == 0);
         }
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -56,7 +53,10 @@ public class moveCell : MonoBehaviour
                 lasmove = false;
                 hasmove -= 1;
 
-                this.gameObject.SendMessage("endMove", SendMessageOptions.DontRequireReceiver);
+                if(update)
+                    cell.board.SendMessage("killUpdate",cell.pos, SendMessageOptions.DontRequireReceiver);
+
+                update = true;
             }
 
         }

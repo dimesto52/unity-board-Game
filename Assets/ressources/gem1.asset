@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791a7e434ad2eca4eacf2e182e060620, type: 3}
   m_Name: gem1
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 8425032644258207736, guid: cf163661325c7264da3afb58957cabf4, type: 3}
   bonusList:
   - type: 0
     minval: 5
-    prefab: {fileID: 0}
+    prefab: {fileID: 8425032644258207736, guid: 1ecc2fd357b66d34d9f4d427d8228703,
+      type: 3}
   - type: 1
     minval: 5
-    prefab: {fileID: 0}
+    prefab: {fileID: 8425032644258207736, guid: 0352cfce4e1390345aa9cb99e7b47416,
+      type: 3}
   - type: 2
     minval: 5
-    prefab: {fileID: 0}
+    prefab: {fileID: 8425032644258207736, guid: ae24724476c637b41b6a85595f495a3e,
+      type: 3}

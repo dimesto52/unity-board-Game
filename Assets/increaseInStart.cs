@@ -5,13 +5,7 @@ using UnityEngine;
 public class increaseInStart : MonoBehaviour
 {
 
-    public float speed
-    {
-        get
-        {
-            return this.GetComponent<moveCell>().speed;
-        }
-    }
+    public float speed = 2.0f;
 
     // Start is called before the first frame update
     void Start()

@@ -44,7 +44,7 @@ public class m3BoardData : BoardData
         gemsContainer.transform.position = transform.position;
         gemsContainer.transform.parent = transform;
 
-
+        /*
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
             {
@@ -72,14 +72,14 @@ public class m3BoardData : BoardData
                 goBack.GetComponent<selectBack>().baseSprite = baseSprite;
 
                 goBack.transform.parent = backContainer.transform;
-            }
+            }*/
     }
     public new void generate()
     {
 
         //if (cells.Length == 0)
             base.generate();
-
+        /*
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
             {
@@ -99,7 +99,7 @@ public class m3BoardData : BoardData
                 c.position = transform.position + Vector3.up * (y - (height - 1) / 2.0f) + Vector3.right * (x - (width - 1) / 2.0f);
                 
                 getCell(x, y).board = this;
-            }
+            }*/
     }
 
     public float timeLeft = 0;
@@ -114,7 +114,7 @@ public class m3BoardData : BoardData
             if (timeLeft >= 1.0f + waitStep)
             {
                 timeLeft -= 1.0f + waitStep;
-
+                /*
                 foreach (Cell c in cells)
                 {
                     if(c.Actions.ContainsKey("Fall"))
@@ -144,13 +144,15 @@ public class m3BoardData : BoardData
                         c.gameObject = go;
 
                     }
-                }
+                }*/
             }
     }
 
     GameObject gemCreator(int id, Cell c)
     {
-        GameObject go = GameObject.Instantiate(base.prefabCellContain[id]);
+        GameObject go = null;
+        /*
+        go = GameObject.Instantiate(base.prefabCellContain[id]);
         go.transform.position = c.position;
 
         if (go.GetComponent<cellLink>() == null)
@@ -179,7 +181,7 @@ public class m3BoardData : BoardData
         go.name = "gem" + indexGem;
         go.transform.parent = gemsContainer.transform;
         indexGem++;
-
+        */
         return go;
     }
     public GameObject spawnBonus(int id, Cell c , int type)
@@ -214,8 +216,8 @@ public class m3BoardData : BoardData
 
         if (go.GetComponent<m3BonusBreak>() == null)
             go.AddComponent<m3BonusBreak>();
-        go.GetComponent<m3BonusBreak>().particul = particul;
-        go.GetComponent<m3BonusBreak>().sound = soundbreak;
+        //go.GetComponent<m3BonusBreak>().particul = particul;
+        //go.GetComponent<m3BonusBreak>().sound = soundbreak;
         go.GetComponent<m3BonusBreak>().type = type;
 
         if (go.GetComponent<increaseInStart>() == null)
@@ -236,12 +238,13 @@ public class m3BoardData : BoardData
 
         Cell lastcell = ((actionFall)c.Actions["Fall"]).lastEmpty();
 
+        /*
         for(int i = 0; i < base.prefabCellContain.Length; i++)
         {
             if (check(i, c))
                 valid.Add(i);
         }
-
+        */
 
         return valid.ToArray();
     }

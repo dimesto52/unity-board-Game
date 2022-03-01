@@ -7,13 +7,8 @@ using UnityEngine.UI;
 public class needEntryData : MonoBehaviour
 {
 
-    public m3BoardData board
-    {
-        get
-        {
-            return GameObject.FindObjectOfType<m3BoardData>();
-        }
-    }
+
+    public gemSpawn board;
 
     public GameObject needMesh;
     public Text count;
@@ -34,15 +29,18 @@ public class needEntryData : MonoBehaviour
 
     public void setdata(gemCount gem)
     {
+        
         this.gem = gem;
            GameObject prefab = null;
+
         if(gem.bonus == -1)
         {
-            prefab = board.prefabCellContain[gem.gem];
+            Debug.Log(gem.gem);
+            prefab = board.gems[gem.gem].prefab;
         }
         else
         {
-            prefab = board.prefabBonusContain[gem.bonus].prefab[gem.gem];
+            prefab = board.gems[gem.gem].bonusList[gem.bonus].prefab;
         }
 
         GameObject go = GameObject.Instantiate(prefab);
@@ -50,6 +48,7 @@ public class needEntryData : MonoBehaviour
         go.transform.localPosition = Vector3.zero;
 
         gem.counted = gem.count;
+        
     }
 
 }

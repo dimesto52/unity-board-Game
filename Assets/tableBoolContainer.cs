@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "board", menuName = "board/boardShape", order = 1)]
-public class boardShape : ScriptableObject
+[System.Serializable]
+public class tableBoolContainer
 {
 
     //public Dictionary<int, rowBoardObject> rows;
     [HideInInspector]
     public List<int> rowsIndex;
-    public List<rowShape> rows;
+    public List<rowbool> rows;
 
     public int rowCount
     {
@@ -18,29 +18,25 @@ public class boardShape : ScriptableObject
             if (rows == null)
             {
                 rowsIndex = new List<int>();
-                rows = new List<rowShape>();
+                rows = new List<rowbool>();
             }
 
             return rows.Count;
         }
     }
 
-    public bool getcell(Vector2 pos)
-    {
-        return getcell((int)pos.x, (int)pos.y);
-    }
     public bool getcell(int x, int y)
     {
         if (rows == null)
         {
             rowsIndex = new List<int>();
-            rows = new List<rowShape>();
+            rows = new List<rowbool>();
         }
 
         if (!rowsIndex.Contains(x))
         {
             rowsIndex.Add(x);
-            rows.Add(new rowShape());
+            rows.Add(new rowbool());
         }
 
         int index = rowsIndex.LastIndexOf(x);
@@ -53,13 +49,13 @@ public class boardShape : ScriptableObject
         if (rows == null)
         {
             rowsIndex = new List<int>();
-            rows = new List<rowShape>();
+            rows = new List<rowbool>();
         }
 
         if (!rowsIndex.Contains(x))
         {
             rowsIndex.Add(x);
-            rows.Add(new rowShape());
+            rows.Add(new rowbool());
         }
 
         int index = rowsIndex.LastIndexOf(x);
@@ -72,13 +68,13 @@ public class boardShape : ScriptableObject
         if (rows == null)
         {
             rowsIndex = new List<int>();
-            rows = new List<rowShape>();
+            rows = new List<rowbool>();
         }
 
         if (!rowsIndex.Contains(x))
         {
             rowsIndex.Add(x);
-            rows.Add(new rowShape());
+            rows.Add(new rowbool());
         }
 
         int index = rowsIndex.LastIndexOf(x);
@@ -90,17 +86,17 @@ public class boardShape : ScriptableObject
         if (rows == null)
         {
             rowsIndex = new List<int>();
-            rows = new List<rowShape>();
+            rows = new List<rowbool>();
         }
 
+        rowsIndex.Clear();
         rows.Clear();
     }
 
 }
 
 [System.Serializable]
-public class rowShape
+public class rowbool
 {
     public List<int> cols = new List<int>();
 }
-

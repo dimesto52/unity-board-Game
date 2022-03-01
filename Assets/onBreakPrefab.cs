@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class onBreakPrefab : MonoBehaviour
 {
-    public Cell cell
+    public cellLink cell
     {
         get
         {
-            return this.GetComponent<cellLink>().cell;
+            return this.GetComponent<cellLink>();
         }
     }
+
+    bool readyToBreak = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +23,9 @@ public class onBreakPrefab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(readyToBreak)
+            GameObject.Destroy(this.gameObject);
+
     }
 
     public GameObject particul;
@@ -33,13 +38,16 @@ public class onBreakPrefab : MonoBehaviour
 
         needTo score = GameObject.FindObjectOfType<needTo>();
         if (score != null)
-            score.onbreak(cell.container.Get_idObj(), -1);
+            score.onbreak(cell.board.container.getcell(cell.pos), -1);
 
-        cell.container.Set_idObj(-1);
+        cell.board.container.setcell(cell.pos,-1);
+        cell.board.gocontainer.setcell(cell.pos, null);
 
-        GameObject.Destroy(this.gameObject);
-        
-        
+        //Debug.Log(cell.pos);
+
+        readyToBreak = true;
+
+
 
     }
 }

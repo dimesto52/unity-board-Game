@@ -6,11 +6,18 @@ public class m3UpdateEndMove : MonoBehaviour
 {
 
 
-    public Cell cell
+    public cellLink cell
     {
         get
         {
-            return this.GetComponent<cellLink>().cell;
+            return this.GetComponent<cellLink>();
+        }
+    }
+    public gemsSwap swap
+    {
+        get
+        {
+            return cell.board.GetComponent<gemsSwap>();
         }
     }
 
@@ -29,9 +36,9 @@ public class m3UpdateEndMove : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (doUpdate && moveCell.canmove && actionM3Click.first == null && actionM3Click.second == null)
+        if (doUpdate && moveCell.canmove)
         {
-            ((actionM3Kill)cell.Actions["kill"]).Update();
+            cell.board.SendMessage("testSwap");
         }
     }
 }

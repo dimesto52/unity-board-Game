@@ -15,8 +15,9 @@ public class boardEditor : Editor
     void OnEnable()
     {
         board = (m3BoardData)target;
+        /*
         if (board.cells.Length == 0)
-            board.generate();
+            board.generate();*/
     }
 
 

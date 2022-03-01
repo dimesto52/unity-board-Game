@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class activLose : MonoBehaviour
 {
+    public BoardData board;
     public GameObject uiLose;
 
     // Start is called before the first frame update
@@ -17,7 +18,7 @@ public class activLose : MonoBehaviour
     {
         if(uiLose != null)
         {
-            if(m3BoardData.allowTurn <= 0 )
+            if(board.alowMove <= 0 )
             {
                 uiLose.SetActive(true);
             }

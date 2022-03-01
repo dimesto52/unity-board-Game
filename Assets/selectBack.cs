@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class selectBack : MonoBehaviour
 {
-    public Cell cell
-    {
-        get
-        {
-            return this.GetComponent<cellLink>().cell;
-        }
-    }
+    public Vector2 pos;
+    public gemsSwap swap;
+    
+
+    public Sprite selectedSprite;
+    public Sprite baseSprite;
+
     public SpriteRenderer render
     {
         get
@@ -18,9 +18,6 @@ public class selectBack : MonoBehaviour
             return this.GetComponent<SpriteRenderer>();
         }
     }
-
-    public Sprite selectedSprite;
-    public Sprite baseSprite;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +29,10 @@ public class selectBack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(actionM3Click.first == cell || actionM3Click.second == cell)
+        if(
+            (swap.first.pos == pos && (swap.mode == swapMode.firstSelect || swap.mode == swapMode.secondSelect))||
+            (swap.second.pos == pos && (swap.mode == swapMode.secondSelect))
+            )
         {
             render.sprite = selectedSprite;
         }

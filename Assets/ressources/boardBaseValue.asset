@@ -13,5 +13,27 @@ MonoBehaviour:
   m_Name: boardBaseValue
   m_EditorClassIdentifier: 
   container:
-    rowsIndex: 
-    rows: []
+    rowsIndex: 0000000001000000ffffffff02000000fefffffffdffffff03000000fcffffff04000000fbffffff05000000
+    rows:
+    - colsIndex: 
+      cols: 
+    - colsIndex: 
+      cols: 
+    - colsIndex: 
+      cols: 
+    - colsIndex: 
+      cols: 
+    - colsIndex: 
+      cols: 
+    - colsIndex: 
+      cols: 
+    - colsIndex: 
+      cols: 
+    - colsIndex: 
+      cols: 
+    - colsIndex: 
+      cols: 
+    - colsIndex: 
+      cols: 
+    - colsIndex: 
+      cols: 

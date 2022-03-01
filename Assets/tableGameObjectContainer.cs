@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class tableIntContainer
+public class tableGameObjectContainer
 {
     [HideInInspector]
     public List<int> rowsIndex;
-    public List<rowBoardInt> rows;
+    public List<rowBoardGameObject> rows;
 
     public int rowCount
     {
@@ -16,70 +16,70 @@ public class tableIntContainer
             if (rows == null)
             {
                 rowsIndex = new List<int>();
-                rows = new List<rowBoardInt>();
+                rows = new List<rowBoardGameObject>();
             }
 
             return rows.Count;
         }
     }
 
-    public int getcell(Vector2 pos)
+    public GameObject getcell(Vector2 pos)
     {
         return getcell((int)pos.x, (int)pos.y);
     }
-    public int getcell(int x, int y)
+    public GameObject getcell(int x, int y)
     {
         if (rows == null)
         {
             rowsIndex = new List<int>();
-            rows = new List<rowBoardInt>();
+            rows = new List<rowBoardGameObject>();
         }
 
         if (!rowsIndex.Contains(x))
         {
             rowsIndex.Add(x);
-            rows.Add(new rowBoardInt());
+            rows.Add(new rowBoardGameObject());
         }
 
         int index = rowsIndex.LastIndexOf(x);
 
         return rows[index].get(y);
     }
-    public void setcell(Vector2 pos, int val)
+    public void setcell(Vector2 pos, GameObject val)
     {
         setcell((int)pos.x, (int)pos.y, val);
     }
-    public void setcell(int x, int y, int val)
+    public void setcell(int x, int y, GameObject val)
     {
         if (rows == null)
         {
             rowsIndex = new List<int>();
-            rows = new List<rowBoardInt>();
+            rows = new List<rowBoardGameObject>();
         }
 
         if (!rowsIndex.Contains(x))
         {
             rowsIndex.Add(x);
-            rows.Add(new rowBoardInt());
+            rows.Add(new rowBoardGameObject());
         }
 
         int index = rowsIndex.LastIndexOf(x);
 
         rows[index].set(y, val);
     }
-    public void addcell(int x, int y, int val)
+    public void addcell(int x, int y, GameObject val)
     {
 
         if (rows == null)
         {
             rowsIndex = new List<int>();
-            rows = new List<rowBoardInt>();
+            rows = new List<rowBoardGameObject>();
         }
 
         if (!rowsIndex.Contains(x))
         {
             rowsIndex.Add(x);
-            rows.Add(new rowBoardInt());
+            rows.Add(new rowBoardGameObject());
         }
 
         int index = rowsIndex.LastIndexOf(x);
@@ -92,13 +92,13 @@ public class tableIntContainer
         if (rows == null)
         {
             rowsIndex = new List<int>();
-            rows = new List<rowBoardInt>();
+            rows = new List<rowBoardGameObject>();
         }
 
         if (!rowsIndex.Contains(x))
         {
             rowsIndex.Add(x);
-            rows.Add(new rowBoardInt());
+            rows.Add(new rowBoardGameObject());
         }
 
         int index = rowsIndex.LastIndexOf(x);
@@ -117,7 +117,7 @@ public class tableIntContainer
         if (rows == null)
         {
             rowsIndex = new List<int>();
-            rows = new List<rowBoardInt>();
+            rows = new List<rowBoardGameObject>();
         }
 
         rowsIndex.Clear();
@@ -127,13 +127,13 @@ public class tableIntContainer
 }
 
 [System.Serializable]
-public class rowBoardInt
+public class rowBoardGameObject
 {
     //public Dictionary<int, Cell> cols;
 
     [HideInInspector]
     public List<int> colsIndex;
-    public List<int> cols;
+    public List<GameObject> cols;
 
     public int colCount
     {
@@ -142,35 +142,35 @@ public class rowBoardInt
             if (cols == null)
             {
                 colsIndex = new List<int>();
-                cols = new List<int>();
+                cols = new List<GameObject>();
             }
 
             return cols.Count;
         }
     }
 
-    public int get(int y)
+    public GameObject get(int y)
     {
 
         if (cols == null)
         {
             colsIndex = new List<int>();
-            cols = new List<int>();
+            cols = new List<GameObject>();
         }
 
         if (!colsIndex.Contains(y))
-            return -1;
+            return null;
 
         int index = colsIndex.LastIndexOf(y);
         return cols[index];
     }
-    public void set(int y, int val)
+    public void set(int y, GameObject val)
     {
 
         if (cols == null)
         {
             colsIndex = new List<int>();
-            cols = new List<int>();
+            cols = new List<GameObject>();
         }
 
         if (!colsIndex.Contains(y))
@@ -179,12 +179,12 @@ public class rowBoardInt
         int index = colsIndex.LastIndexOf(y);
         cols[index] = val;
     }
-    public void add(int y, int val)
+    public void add(int y, GameObject val)
     {
         if (cols == null)
         {
             colsIndex = new List<int>();
-            cols = new List<int>();
+            cols = new List<GameObject>();
         }
 
         if (!colsIndex.Contains(y))
@@ -198,7 +198,7 @@ public class rowBoardInt
         if (cols == null)
         {
             colsIndex = new List<int>();
-            cols = new List<int>();
+            cols = new List<GameObject>();
         }
 
         if (colsIndex.Contains(y))

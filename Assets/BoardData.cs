@@ -5,25 +5,44 @@ using UnityEngine;
 public class BoardData : MonoBehaviour
 {
 
+    public tableGameObjectContainer gocontainer;
     public tableIntContainer container;
     public boardShape obj;
     public boardValueInt initValue;
 
+    public int alowMove;
+    
+    /*
     public Cell[] cells;
 
     public int height = 1;
     public int width = 1;
+    */
 
-    public GameObject[] prefabCellContain;
+    //public GameObject[] prefabCellContain;
 
     public void Start()
     {
-        if (cells.Length == 0)
+        //if (cells.Length == 0)
         generate();
 
     }
+
     public void generate()
     {
+        if (obj != null)
+            if (obj.rows != null)
+                foreach (int x in obj.rowsIndex)
+                {
+                    int indexX = obj.rowsIndex.IndexOf(x);
+                    foreach (int y in obj.rows[indexX].cols)
+                    {
+                        int c = initValue.container.getcell(x, y);
+                        container.addcell(x,y,c);
+                    }
+                }
+
+        /*
         cells = new Cell[height * width];
 
         for (int x = 0; x < width; x++)
@@ -43,8 +62,9 @@ public class BoardData : MonoBehaviour
                 }
 
             }
-
+        */
     }
+    /*
     public Cell getCell(int x , int y)
     {
         //return obj.getcell(x, y);
@@ -62,4 +82,5 @@ public class BoardData : MonoBehaviour
     {
         cells[x + y * width] = c;
     }
+    */
 }
