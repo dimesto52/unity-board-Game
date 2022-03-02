@@ -24,7 +24,7 @@ public class needTo : MonoBehaviour
         {
             GameObject go = GameObject.Instantiate(entryList);
             
-            go.GetComponent<RectTransform>().parent = listneed.GetComponent<RectTransform>();
+            go.GetComponent<RectTransform>().SetParent(listneed.GetComponent<RectTransform>());
             go.GetComponent<RectTransform>().localScale = Vector3.one;
 
             if (go.GetComponent<needEntryData>() == null)

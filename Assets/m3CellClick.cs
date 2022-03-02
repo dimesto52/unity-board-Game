@@ -88,12 +88,15 @@ public class m3CellClick : MonoBehaviour
             else if (swap.mode == swapMode.firstSelect)
             {
 
-                swap.second.go = this.gameObject;
-                swap.second.pos = cell.pos;
+                if (Vector2.Distance(swap.first.pos, cell.pos) <= 1.0f)
+                {
+                    swap.second.go = this.gameObject;
+                    swap.second.pos = cell.pos;
 
-                swap.goSwap();
+                    swap.goSwap();
 
-                swap.mode = swapMode.secondSelect;
+                    swap.mode = swapMode.secondSelect;
+                }
             }
 
         /*

@@ -55,15 +55,18 @@ public class gemFall : MonoBehaviour
         
         if (go != null)
         {
-            go.GetComponent<cellLink>().pos = new Vector2(x, y);
+            Vector2 FallPos = mostDownPos(new Vector2(x, y));
+
+            go.GetComponent<cellLink>().pos = FallPos;
+            
 
             board.gocontainer.setcell(x, y + 1, null);
-            board.gocontainer.setcell(x, y, go);
+            board.gocontainer.setcell(FallPos, go);
 
 
             int val = board.container.getcell(x, y + 1);
             board.container.setcell(x, y + 1, -1);
-            board.container.setcell(x, y, val);
+            board.container.setcell(FallPos, val);
         }
     }
 
@@ -73,5 +76,29 @@ public class gemFall : MonoBehaviour
     {
         e.go.AddComponent<moveCell>();
         e.go.GetComponent<moveCell>().speed = speed;
+    }
+
+    Vector2 mostDownPos(Vector2 pos)
+    {
+        int i = 0;
+        bool ContinueDown = true;
+
+        while (ContinueDown)
+        {
+            Vector2 checkPos = pos + i * Vector2.down;
+            if (board.obj.getcell(checkPos))
+            {
+                if (board.container.getcell(checkPos) == -1)
+                {
+                    i++;
+                }
+                else
+                    ContinueDown = false;
+            }
+            else
+                ContinueDown = false;
+        }
+
+        return pos + (i - 1) * Vector2.down;
     }
 }

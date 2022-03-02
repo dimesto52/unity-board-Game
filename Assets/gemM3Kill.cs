@@ -116,97 +116,46 @@ public class gemM3Kill : MonoBehaviour
         killobj(pos);
     }
 
-    public void killLeft(Vector2 pos)
+    public void killDir(Vector2 pos, Vector2 Dir)
     {
         int i = board.container.getcell(pos);
 
-        int checkX = -1;
+        int check = 1;
         bool continuCheck = true;
         while (continuCheck)
         {
-            if (board.obj.getcell(pos + Vector2.right * checkX))
+            Vector3 posCheck = pos + Dir * check;
+            if (board.obj.getcell(posCheck))
             {
-                int j = board.container.getcell(pos + Vector2.right * checkX);
+                int j = board.container.getcell(posCheck);
                 if (i == j)
                 {
-                    killobj(pos + Vector2.right * checkX);
+                    killobj(posCheck);
+                    //Debug.Log("check " + pos + " !");
                 }
                 else
                     continuCheck = false;
             }
             else
                 continuCheck = false;
-            checkX--;
+            check++;
         }
+    }
+    public void killLeft(Vector2 pos)
+    {
+        killDir(pos, Vector2.left);
     }
     public void killRight(Vector2 pos)
     {
-        int i = board.container.getcell(pos);
-
-        int checkX = 1;
-        bool continuCheck = true;
-        while (continuCheck)
-        {
-            if (board.obj.getcell(pos + Vector2.right * checkX))
-            {
-                int j = board.container.getcell(pos + Vector2.right * checkX);
-                if (i == j)
-                {
-                    killobj(pos + Vector2.right * checkX);
-                }
-                else
-                    continuCheck = false;
-            }
-            else
-                continuCheck = false;
-            checkX++;
-        }
+        killDir(pos, Vector2.right);
     }
     public void killDown(Vector2 pos)
     {
-        int i = board.container.getcell(pos);
-
-        int checkY = -1;
-        bool continuCheck = true;
-        while (continuCheck)
-        {
-            if (board.obj.getcell(pos + Vector2.up * checkY))
-            {
-                int j = board.container.getcell(pos + Vector2.up * checkY);
-                if (i == j)
-                {
-                    killobj(pos + Vector2.up * checkY);
-                }
-                else
-                    continuCheck = false;
-            }
-            else
-                continuCheck = false;
-            checkY--;
-        }
+        killDir(pos, Vector2.down);
     }
     public void killUp(Vector2 pos)
     {
-        int i = board.container.getcell(pos);
-
-        int checkY = 1;
-        bool continuCheck = true;
-        while (continuCheck)
-        {
-            if (board.obj.getcell(pos + Vector2.up * checkY))
-            {
-                int j = board.container.getcell(pos + Vector2.up * checkY);
-                if (i == j)
-                {
-                    killobj(pos + Vector2.up * checkY);
-                }
-                else
-                    continuCheck = false;
-            }
-            else
-                continuCheck = false;
-            checkY++;
-        }
+        killDir(pos, Vector2.up);
     }
 
     public int checkHorizontal(Vector2 pos)
@@ -217,19 +166,21 @@ public class gemM3Kill : MonoBehaviour
     {
         return 1 + checkDown(pos) + checkUp(pos);
     }
-    public int checkLeft(Vector2 pos)
+
+    public int checkDir(Vector2 pos, Vector2 Dir)
     {
         int res = 0;
 
-        int i = board.container.getcell((int)pos.x, (int)pos.y);
+        int i = board.container.getcell(pos);
 
-        int checkX = -1;
+        int check = 1;
         bool continuCheck = true;
         while (continuCheck)
         {
-            if (board.obj.getcell((int)pos.x + checkX, (int)pos.y))
+            Vector3 posCheck = pos + Dir * check;
+            if (board.obj.getcell(posCheck))
             {
-                int j = board.container.getcell((int)pos.x + checkX, (int)pos.y);
+                int j = board.container.getcell(posCheck);
                 if (i == j)
                 {
                     res++;
@@ -239,94 +190,29 @@ public class gemM3Kill : MonoBehaviour
             }
             else
                 continuCheck = false;
-            checkX--;
+            check++;
         }
 
         return res;
+    }
+    public int checkLeft(Vector2 pos)
+    {
+        return checkDir(pos, Vector2.left);
     }
 
     public int checkRight(Vector2 pos)
     {
-        int res = 0;
-
-        int i = board.container.getcell((int)pos.x, (int)pos.y);
-
-        int checkX = 1;
-        bool continuCheck = true;
-        while (continuCheck)
-        {
-            if (board.obj.getcell((int)pos.x + checkX, (int)pos.y))
-            {
-                int j = board.container.getcell((int)pos.x + checkX, (int)pos.y);
-                if (i == j)
-                {
-                    res++;
-                }
-                else
-                    continuCheck = false;
-            }
-            else
-                continuCheck = false;
-            checkX++;
-        }
-
-        return res;
+        return checkDir(pos, Vector2.right);
     }
 
     public int checkDown(Vector2 pos)
     {
-        int res = 0;
-
-        int i = board.container.getcell((int)pos.x, (int)pos.y);
-
-        int checkY = -1;
-        bool continuCheck = true;
-        while (continuCheck)
-        {
-            if (board.obj.getcell((int)pos.x, (int)pos.y + checkY))
-            {
-                int j = board.container.getcell((int)pos.x, (int)pos.y + checkY);
-                if (i == j)
-                {
-                    res++;
-                }
-                else
-                    continuCheck = false;
-            }
-            else
-                continuCheck = false;
-            checkY--;
-        }
-
-        return res;
+        return checkDir(pos, Vector2.down);
     }
 
     public int checkUp(Vector2 pos)
     {
-        int res = 0;
-
-        int i = board.container.getcell((int)pos.x, (int)pos.y);
-
-        int checkY = 1;
-        bool continuCheck = true;
-        while (continuCheck)
-        {
-            if (board.obj.getcell((int)pos.x, (int)pos.y + checkY))
-            {
-                int j = board.container.getcell((int)pos.x, (int)pos.y + checkY);
-                if (i == j)
-                {
-                    res++;
-                }
-                else
-                    continuCheck = false;
-            }
-            else
-                continuCheck = false;
-            checkY++;
-        }
-
-        return res;
+        return checkDir(pos, Vector2.up);
     }
 
 }

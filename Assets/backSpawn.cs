@@ -13,8 +13,6 @@ public class backSpawn : MonoBehaviour
         }
     }
     
-
-    public Sprite selectedSprite;
     public Sprite baseSprite;
 
     GameObject backContainer;

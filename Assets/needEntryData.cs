@@ -35,7 +35,7 @@ public class needEntryData : MonoBehaviour
 
         if(gem.bonus == -1)
         {
-            Debug.Log(gem.gem);
+            //Debug.Log(gem.gem);
             prefab = board.gems[gem.gem].prefab;
         }
         else
