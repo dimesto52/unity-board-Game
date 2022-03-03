@@ -9,10 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c741d3685de32b34f9705c6534900b54, type: 3}
-  m_Name: squareDR
+  m_Script: {fileID: 11500000, guid: 98af84cc41a658341b530fdfd4e9e3ad, type: 3}
+  m_Name: CrossbaseBonus
   m_EditorClassIdentifier: 
-  rowsIndex: 0000000001000000
-  rows:
-  - cols: 00000000ffffffff
-  - cols: ffffffff00000000
+  trunk:
+    subPaterne: 
+    next: 0
+    min: -1
+    operation: 1
+  subPaterne: []
+  paternLeaf: []
