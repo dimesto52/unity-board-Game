@@ -10,7 +10,7 @@ public class increaseInStart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //Debug.Log("start");
         transform.localScale = Vector3.zero;
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class cellLink : MonoBehaviour
 {
-    public Cell cell = null;
+    //public Cell cell = null;
 
     public Vector2 pos;
     public BoardData board;

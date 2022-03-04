@@ -13,9 +13,25 @@ MonoBehaviour:
   m_Name: VbaseBonus
   m_EditorClassIdentifier: 
   trunk:
-    subPaterne: 
+    subPaterne: 00000000
     next: 0
     min: -1
     operation: 1
-  subPaterne: []
-  paternLeaf: []
+    pos: {x: 31, y: 107}
+  subPaterne:
+  - subPaterne: 0000000001000000
+    next: 1
+    min: 3
+    operation: 0
+    pos: {x: 200, y: 110}
+  paternLeaf:
+  - posPatern:
+    - {x: 0, y: 1}
+    repeat: 1
+    min: -1
+    pos: {x: 426, y: 63}
+  - posPatern:
+    - {x: 0, y: -1}
+    repeat: 1
+    min: -1
+    pos: {x: 431, y: 163}

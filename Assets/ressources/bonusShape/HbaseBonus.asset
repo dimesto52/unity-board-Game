@@ -10,12 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98af84cc41a658341b530fdfd4e9e3ad, type: 3}
-  m_Name: HbaseBonus 1
+  m_Name: HbaseBonus
   m_EditorClassIdentifier: 
   trunk:
-    subPaterne: 
+    subPaterne: 00000000
     next: 0
     min: -1
     operation: 1
-  subPaterne: []
-  paternLeaf: []
+    pos: {x: 36, y: 99}
+  subPaterne:
+  - subPaterne: 0000000001000000
+    next: 1
+    min: 3
+    operation: 0
+    pos: {x: 173, y: 109}
+  paternLeaf:
+  - posPatern:
+    - {x: -1, y: -0}
+    repeat: 1
+    min: -1
+    pos: {x: 347, y: 47}
+  - posPatern:
+    - {x: 1, y: -0}
+    repeat: 1
+    min: -1
+    pos: {x: 344, y: 156}

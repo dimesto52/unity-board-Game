@@ -12,6 +12,7 @@ public class onBreakPrefab : MonoBehaviour
         }
     }
 
+    public bool sendBreak = false;
     bool readyToBreak = false;
 
     // Start is called before the first frame update
@@ -23,8 +24,23 @@ public class onBreakPrefab : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(readyToBreak)
+        if (readyToBreak)
+        {
+            GameObject.Instantiate(particul, transform.position, transform.rotation);
+            GameObject.Instantiate(sound, transform.position, transform.rotation);
+
+            needTo score = GameObject.FindObjectOfType<needTo>();
+            if (score != null)
+                score.onbreak(cell.board.container.getcell(cell.pos), -1);
+
+            cell.board.container.setcell(cell.pos, -1);
+            cell.board.gocontainer.setcell(cell.pos, null);
+
             GameObject.Destroy(this.gameObject);
+
+            if(sendBreak)
+            cell.board.SendMessage("isBreak", cell.pos);
+        }
 
     }
 
@@ -33,21 +49,9 @@ public class onBreakPrefab : MonoBehaviour
 
     private void Onbreak()
     {
-        GameObject.Instantiate(particul, transform.position, transform.rotation);
-        GameObject.Instantiate(sound, transform.position, transform.rotation);
-
-        needTo score = GameObject.FindObjectOfType<needTo>();
-        if (score != null)
-            score.onbreak(cell.board.container.getcell(cell.pos), -1);
-
-        cell.board.container.setcell(cell.pos,-1);
-        cell.board.gocontainer.setcell(cell.pos, null);
 
         //Debug.Log(cell.pos);
 
         readyToBreak = true;
-
-
-
     }
 }

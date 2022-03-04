@@ -12,7 +12,19 @@ public class gemPatern : ScriptableObject
     public bool eval(BoardData data, Vector2 pos)
     {
         int id = data.container.getcell(pos);
-        if (trunk.eval(data, this, pos, id) >= 1)
+        if (id != -1)
+        {
+            return eval(data, pos, id);
+        }
+        else
+            return false;
+    }
+    public bool eval(BoardData data, Vector2 pos, int id)
+    {
+
+        int value = trunk.eval(data, this, pos, id);
+        //Debug.Log(this.name + " eval " + value);
+        if (value >= 1)
         {
             return true;
         }
@@ -76,25 +88,26 @@ public class gemTreePaternTrunk : gemTreePatern
     }
     public int eval(BoardData data, gemPatern patern, Vector2 pos, int id)
     {
-                int sum = 0;
-        switch(operation )
+        int sum = 0;
+        switch (operation)
         {
             case gemTreeOperation.add:
                 sum = 0;
-                for(int i = 0; i< subPaterne.Count; i++)
+                for (int i = 0; i < subPaterne.Count; i++)
                 {
-                    int temp = 0;
                     gemTreePatern sub = getNext(patern, i);
-                    temp = sub.eval(data, patern, pos, id);
-                    if (temp >= getMin())
-                    {
-                        sum += 1;
-                    }
-                    else
-                    {
-                        sum += temp;
-                    }
+                    sum += sub.eval(data, patern, pos, id);
 
+                }
+
+                if(getMin() != -1)
+                if (sum >= getMin())
+                {
+                    sum = 1;
+                }
+                else
+                {
+                    sum = 0;
                 }
 
                 break;
@@ -104,9 +117,21 @@ public class gemTreePaternTrunk : gemTreePatern
                 for (int i = 0; i < subPaterne.Count; i++)
                 {
                     gemTreePatern sub = getNext(patern, i);
-                    if (sub.eval(data, patern, pos, id) >= sub.getMin())
+                    int evalOr = sub.eval(data, patern, pos, id);
+
+                    if (getMin() != -1)
                     {
-                        sum = 1;
+                        if (evalOr >= getMin())
+                        {
+                            sum = 1;
+                        }
+                    }
+                    else
+                    {
+                        if (evalOr > 0)
+                        {
+                            sum = 1;
+                        }
                     }
                 }
                 break;
@@ -116,7 +141,7 @@ public class gemTreePaternTrunk : gemTreePatern
                 for (int i = 0; i < subPaterne.Count; i++)
                 {
                     gemTreePatern sub = getNext(patern, i);
-                    if (sub.eval(data, patern, pos, id) < sub.getMin())
+                    if (sub.eval(data, patern, pos, id) < getMin())
                     {
                         sum = 0;
                     }
@@ -124,7 +149,8 @@ public class gemTreePaternTrunk : gemTreePatern
                 break;
         }
 
-        return 0;
+        //Debug.Log(sum);
+        return sum;
     }
     
 }
@@ -178,15 +204,19 @@ public class gemTreePaternLeaf : gemTreePatern
                     if (data.container.getcell(checkPos) == id)
                     {
                         res++;
+                        iRepeat++;
                     }
+                    else repeatPos = false;
                 }
+                else repeatPos = false;
             }
         }
 
 
-        if (-1 != getMin())
+        if (getMin() != -1)
             if (res >= getMin())
             {
+                Debug.Log("min");
                 res = 1;
             }
             else
@@ -194,6 +224,8 @@ public class gemTreePaternLeaf : gemTreePatern
                 res = 0;
             }
 
+
+        //Debug.Log(posPatern[0] + " = " + res);
         return res;
     }
 

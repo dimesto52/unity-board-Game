@@ -41,6 +41,8 @@ public class gemPaternEditor : EditorWindow
                     OnGUITree();
                     break;
             }
+
+            EditorUtility.SetDirty(patern);
         }
         else
         {
@@ -104,16 +106,17 @@ public class gemPaternEditor : EditorWindow
             {
                 if (zone.Contains(Event.current.mousePosition))
                 {
+                    //Debug.Log(id);
                     linkIdStart = id;
                     modeCreateLink = part;
 
                 }
             }
-            else if (Event.current.type == EventType.MouseUp)
+            else if (Event.current.type == EventType.MouseUp && modeCreateLink != trunOrLeaf.nul)
             {
                 if (zone.Contains(Event.current.mousePosition))
                 {
-                    Debug.Log("test");
+                    //Debug.Log("test");
 
                     gemTreePaternTrunk trunk;
                     if (linkIdStart != -1)
@@ -142,10 +145,10 @@ public class gemPaternEditor : EditorWindow
 
                         trunk.subPaterne.Add(id);
                     }
-                }
                 linkIdStart = -1;
                 modeCreateLink = trunOrLeaf.nul;
                 lastPos = Vector2.zero;
+                }
             }
 
         if (modeCreateLink != trunOrLeaf.nul)
@@ -192,6 +195,7 @@ public class gemPaternEditor : EditorWindow
         {
             OnGUITreeLeaf(i);
         }
+
 
     }
 
@@ -313,28 +317,31 @@ public class gemPaternEditor : EditorWindow
             }
         }
 
-        Vector2 pos1 = trunk1.getPosEditor() + new Vector2(110, 75);
-        Vector2 pos2 = target.getPosEditor() + new Vector2(10, 75);
-
-        Rect removeRect = new Rect(
-                        (pos1.x + pos2.x) / 2.0f - 5,
-                        (pos1.y + pos2.y) / 2.0f - 5,
-                        10,
-                        10);
-
-        EditorGUI.DrawRect(removeRect, Color.magenta);
-
-        if (removeRect.Contains(Event.current.mousePosition))
+        if (target != null)
         {
-            if (Event.current.type == EventType.MouseDown)
-                trunk1.subPaterne.Remove(trunk1.subPaterne[linkId]);
-        }
+            Vector2 pos1 = trunk1.getPosEditor() + new Vector2(110, 75);
+            Vector2 pos2 = target.getPosEditor() + new Vector2(10, 75);
+
+            Rect removeRect = new Rect(
+                            (pos1.x + pos2.x) / 2.0f - 5,
+                            (pos1.y + pos2.y) / 2.0f - 5,
+                            10,
+                            10);
+
+            EditorGUI.DrawRect(removeRect, Color.magenta);
+
+            if (removeRect.Contains(Event.current.mousePosition))
+            {
+                if (Event.current.type == EventType.MouseDown)
+                    trunk1.subPaterne.Remove(trunk1.subPaterne[linkId]);
+            }
 
 
             Handles.BeginGUI();
-        Handles.color = Color.red;
-        Handles.DrawLine(pos1, pos2);
-        Handles.EndGUI();
+            Handles.color = Color.red;
+            Handles.DrawLine(pos1, pos2);
+            Handles.EndGUI();
+        }
     }
     void OnGUITreeLeaf(int leafId)
     {

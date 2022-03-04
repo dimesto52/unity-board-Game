@@ -24,18 +24,10 @@ public class m3BonusBreak : MonoBehaviour
         //Debug.Log("booom !");
             alreadyDestroy = true;
 
-            switch (type)
-            {
-                case 0:
-                    killHorizontal(cell.pos);
-                    break;
-                case 1:
-                    killVertical(cell.pos);
-                    break;
-                case 2:
-                    killCross(cell.pos);
-                    break;
-            }
+            this.SendMessage("doBreak");
+            //killobj(cell.pos);
+
+            //doBreak();
 
         }
     }
@@ -61,45 +53,6 @@ public class m3BonusBreak : MonoBehaviour
                 killobj(new Vector2(x, y));
             }
         }
-    }
-
-    private void killCross(Vector2 pos)
-    {
-        killLeft(pos);
-        killRight(pos);
-        killDown(pos);
-        killUp(pos);
-        //Debug.Log("killCross !");
-    }
-
-    private void killHorizontal(Vector2 pos)
-    {
-        killLeft(pos);
-        killRight(pos);
-        //Debug.Log("killHorizontal !");
-    }
-    private void killVertical(Vector2 pos)
-    {
-        killDown(pos);
-        killUp(pos);
-        //Debug.Log("killVertical !");
-    }
-
-    public void killLeft(Vector2 pos)
-    {
-        killDir(pos, Vector2.left);
-    }
-    public void killRight(Vector2 pos)
-    {
-        killDir(pos, Vector2.right);
-    }
-    public void killUp(Vector2 pos)
-    {
-        killDir(pos, Vector2.up);
-    }
-    public void killDown(Vector2 pos)
-    {
-        killDir(pos, Vector2.down);
     }
 
     public void killDir(Vector2 pos, Vector2 Dir)

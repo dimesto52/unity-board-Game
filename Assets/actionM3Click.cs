@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class actionM3Click : CellAction
 {
+    /*
 
     public static Cell first = null;
     public static Cell second = null;
@@ -47,4 +48,5 @@ public class actionM3Click : CellAction
         first.gameObject.GetComponent<cellLink>().cell = first;
         second.gameObject.GetComponent<cellLink>().cell = second;
     }
+    */
 }

@@ -533,16 +533,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 11400000, guid: 78a3d287902b8a544bce1de7299374ce, type: 2}
-  gems:
-  - {fileID: 11400000, guid: dab785ba6387678418ff6fd3eb885fb2, type: 2}
-  - {fileID: 11400000, guid: 07856138fc0160540ae70f65b68a0c10, type: 2}
-  - {fileID: 11400000, guid: 16a1c31205db72841a445e0649acbddf, type: 2}
-  - {fileID: 11400000, guid: 3ccb8b8e42e92a34cbf2320b5a14e127, type: 2}
+  gems: []
   gemsSpawn:
-  - {fileID: 11400000, guid: dab785ba6387678418ff6fd3eb885fb2, type: 2}
-  - {fileID: 11400000, guid: 07856138fc0160540ae70f65b68a0c10, type: 2}
-  - {fileID: 11400000, guid: 16a1c31205db72841a445e0649acbddf, type: 2}
-  - {fileID: 11400000, guid: 3ccb8b8e42e92a34cbf2320b5a14e127, type: 2}
+  - {fileID: 8425032644258207736, guid: cf163661325c7264da3afb58957cabf4, type: 3}
+  - {fileID: 6785841088072236585, guid: 4428549aa8488074db13315242ddd968, type: 3}
+  - {fileID: 572587810718624340, guid: cbcfcd48583d09b48831ac2ea9324f2f, type: 3}
+  - {fileID: 2873399128836492330, guid: 0153d21bd35472c40bd648669226ce11, type: 3}
   timeLeft: 0
   speedStep: 2
   waitStep: 0.05
@@ -611,6 +607,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fccc3874299967d47b603d26ab40eb7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paterns:
+  - bonusPrefab: {fileID: 8425032644258207736, guid: ae24724476c637b41b6a85595f495a3e,
+      type: 3}
+    patern: {fileID: 11400000, guid: f1292fc692922104fb57e3b5d7eae580, type: 2}
+    id: 0
+  - bonusPrefab: {fileID: 8425032644258207736, guid: 4723c05c4c953e74c87bb3f5f6a3ae89,
+      type: 3}
+    patern: {fileID: 11400000, guid: f1292fc692922104fb57e3b5d7eae580, type: 2}
+    id: 1
+  - bonusPrefab: {fileID: 8425032644258207736, guid: 057b17af078c282498b366129844d594,
+      type: 3}
+    patern: {fileID: 11400000, guid: f1292fc692922104fb57e3b5d7eae580, type: 2}
+    id: 2
+  - bonusPrefab: {fileID: 8425032644258207736, guid: 256121f06a0e9fb4c9df892736dad1d6,
+      type: 3}
+    patern: {fileID: 11400000, guid: f1292fc692922104fb57e3b5d7eae580, type: 2}
+    id: 3
+  - bonusPrefab: {fileID: 8425032644258207736, guid: 1ecc2fd357b66d34d9f4d427d8228703,
+      type: 3}
+    patern: {fileID: 11400000, guid: 6c253892730cd244ab365a95825b8c8a, type: 2}
+    id: 0
+  - bonusPrefab: {fileID: 8425032644258207736, guid: 6096dd50361bda94a94b3f9f24fc16dc,
+      type: 3}
+    patern: {fileID: 11400000, guid: 6c253892730cd244ab365a95825b8c8a, type: 2}
+    id: 1
+  - bonusPrefab: {fileID: 8425032644258207736, guid: 23bfc4226b79f7f4ca5d74ec1dc5a1b7,
+      type: 3}
+    patern: {fileID: 11400000, guid: 6c253892730cd244ab365a95825b8c8a, type: 2}
+    id: 2
+  - bonusPrefab: {fileID: 8425032644258207736, guid: bb80f121a7d919742acdb68a12aca425,
+      type: 3}
+    patern: {fileID: 11400000, guid: 6c253892730cd244ab365a95825b8c8a, type: 2}
+    id: 3
+  - bonusPrefab: {fileID: 8425032644258207736, guid: 0352cfce4e1390345aa9cb99e7b47416,
+      type: 3}
+    patern: {fileID: 11400000, guid: 84ad2bc588ff7ab46a60611c1bbb13eb, type: 2}
+    id: 0
+  - bonusPrefab: {fileID: 8425032644258207736, guid: b1e89bec53b9d5a41a579dcac1d1a328,
+      type: 3}
+    patern: {fileID: 11400000, guid: 84ad2bc588ff7ab46a60611c1bbb13eb, type: 2}
+    id: 1
+  - bonusPrefab: {fileID: 8425032644258207736, guid: 48669710983d6034f85caaa3a3fc8346,
+      type: 3}
+    patern: {fileID: 11400000, guid: 84ad2bc588ff7ab46a60611c1bbb13eb, type: 2}
+    id: 2
+  - bonusPrefab: {fileID: 8425032644258207736, guid: 38b0648b5a95948409c63154b5412fa0,
+      type: 3}
+    patern: {fileID: 11400000, guid: 84ad2bc588ff7ab46a60611c1bbb13eb, type: 2}
+    id: 3
 --- !u!1 &1524049489
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1524049490
 MonoBehaviour:
   m_ObjectHideFlags: 0

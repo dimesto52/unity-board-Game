@@ -33,14 +33,14 @@ public class needEntryData : MonoBehaviour
         this.gem = gem;
            GameObject prefab = null;
 
-        if(gem.bonus == -1)
+        if(gem.bonus > 0)
         {
             //Debug.Log(gem.gem);
-            prefab = board.gems[gem.gem].prefab;
+            prefab = board.gems[gem.gem];
         }
         else
         {
-            prefab = board.gems[gem.gem].bonusList[gem.bonus].prefab;
+            prefab = board.GetComponent<gemBonusSpawn>().paterns[gem.gem].bonusPrefab;
         }
 
         GameObject go = GameObject.Instantiate(prefab);

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class actionFall : CellAction
 {
+    /*
     public new void Update()
     {
         //Debug.Log(cell.container.Get_idObj());
@@ -62,4 +63,5 @@ public class actionFall : CellAction
 
         return res;
     }
+    */
 }

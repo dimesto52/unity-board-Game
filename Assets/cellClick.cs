@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class cellClick : MonoBehaviour
 {
+    /*
     public Cell cell
     {
         get
@@ -35,4 +36,5 @@ public class cellClick : MonoBehaviour
             //Debug.Log(cell.Actions["click"] + " : " + id.ToString() + " / " + cell.container.Get_idObj());
         }
     }
+    */
 }

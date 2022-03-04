@@ -40,15 +40,15 @@ public class gemSpawn : MonoBehaviour
                     {
                         int c = board.initValue.container.getcell(x, y);
                         if (c != -1)
-                            spawnAt(new Vector2(x, y), c, true);
+                            spawnAt(new Vector2(x, y), c);
                     }
                 }
     }
 
     public boardShape spawner;
 
-    public List<boardGemObject> gems;
-    public List<boardGemObject> gemsSpawn;
+    public List<GameObject> gems;
+    public List<GameObject> gemsSpawn;
 
     public float timeLeft = 0;
     public float speedStep = 2.0f;
@@ -81,7 +81,7 @@ public class gemSpawn : MonoBehaviour
                                 int rand = Random.Range(0, valid.Length);
 
                                 c = valid[rand];
-                                spawnAt(new Vector2(x, y), c, false);
+                                spawnAt(new Vector2(x, y), c);
                             }
                         }
                     }
@@ -97,7 +97,7 @@ public class gemSpawn : MonoBehaviour
 
         List<int> res = new List<int>(); 
 
-        for(int i = 0; i < gems.Count; i++)
+        for(int i = 0; i < gemsSpawn.Count; i++)
         {
             if(!(inValidh.Contains(i) || inValidv.Contains(i)))
             {
@@ -229,13 +229,13 @@ public class gemSpawn : MonoBehaviour
         return res ;
     }
 
-    void spawnAt(Vector2 pos, int id, bool init)
+    void spawnAt(Vector2 pos, int id)
     {
         GameObject go;
-        if (init)
-            go = GameObject.Instantiate(this.gems[id].prefab);
+        if (id >= this.gems.Count)
+            go = GameObject.Instantiate(this.gemsSpawn[id]);
         else
-            go = GameObject.Instantiate(this.gemsSpawn[id].prefab);
+            go = GameObject.Instantiate(this.gems[id - this.gems.Count]);
 
         go.transform.position = transform.position + new Vector3(pos.x, pos.y, -1);
         go.transform.parent = gemContainer.transform;

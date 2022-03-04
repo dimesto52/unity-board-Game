@@ -61,25 +61,21 @@ public class gemM3Kill : MonoBehaviour
 
         int h = checkHorizontal(pos);
         int v = checkVertical(pos);
-
-        if (h >= 3 && v >= 3)
+        if (h >= 3|| v >= 3)
         {
-            res = h + v - 1;
-            killCross(pos);
-            this.SendMessage("OnBonus",new onBonus(res, id, pos, boardGemBonusType.cross), SendMessageOptions.DontRequireReceiver);
+            killobj(pos);
         }
-        else if (h >= 3)
+        if (h >= 3)
         {
             res = h;
             killHorizontal(pos);
-            this.SendMessage("OnBonus", new onBonus(res, id, pos, boardGemBonusType.horizontal), SendMessageOptions.DontRequireReceiver);
         }
-        else if (v >= 3)
+        if (v >= 3)
         {
             res = v;
             killVertical(pos);
-            this.SendMessage("OnBonus", new onBonus(res, id, pos, boardGemBonusType.vertical), SendMessageOptions.DontRequireReceiver);
         }
+        this.SendMessage("OnBonus", new onBonus(id, pos), SendMessageOptions.DontRequireReceiver);
 
         return res;
     }
@@ -218,17 +214,13 @@ public class gemM3Kill : MonoBehaviour
 }
 public class onBonus
 {
-    public int val;
     public int id;
     public Vector2 pos;
-    public boardGemBonusType mode;
 
-    public onBonus(int val, int id, Vector2 pos, boardGemBonusType mode)
+    public onBonus( int id, Vector2 pos)
     {
-        this.val = val;
         this.id = id;
         this.pos = pos;
-        this.mode = mode;
     }
     
 }

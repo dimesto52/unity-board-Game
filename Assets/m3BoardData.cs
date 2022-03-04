@@ -202,7 +202,7 @@ public class m3BoardData : BoardData
         if (go.GetComponent<cellLink>() == null)
             go.AddComponent<cellLink>();
 
-        go.GetComponent<cellLink>().cell = c;
+        //go.GetComponent<cellLink>().cell = c;
 
         if (go.GetComponent<m3CellClick>() == null)
             go.AddComponent<m3CellClick>();
@@ -236,7 +236,7 @@ public class m3BoardData : BoardData
     {
         List<int> valid = new List<int>();
 
-        Cell lastcell = ((actionFall)c.Actions["Fall"]).lastEmpty();
+        //Cell lastcell = ((actionFall)c.Actions["Fall"]).lastEmpty();
 
         /*
         for(int i = 0; i < base.prefabCellContain.Length; i++)
