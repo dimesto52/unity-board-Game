@@ -13,7 +13,6 @@ public class m3BonusBreak : MonoBehaviour
         }
     }
     
-    public int type;
 
     public bool alreadyDestroy = false;
 
@@ -41,18 +40,6 @@ public class m3BonusBreak : MonoBehaviour
 
         //Debug.Log("kill " + pos + " !");
 
-    }
-
-    private void killAll(Vector2 pos)
-    {
-        foreach (int x in cell.board.container.rowsIndex)
-        {
-            int indexX = cell.board.container.rowsIndex.IndexOf(x);
-            foreach (int y in cell.board.container.rows[indexX].colsIndex)
-            {
-                killobj(new Vector2(x, y));
-            }
-        }
     }
 
     public void killDir(Vector2 pos, Vector2 Dir)

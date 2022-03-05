@@ -218,7 +218,7 @@ public class m3BoardData : BoardData
             go.AddComponent<m3BonusBreak>();
         //go.GetComponent<m3BonusBreak>().particul = particul;
         //go.GetComponent<m3BonusBreak>().sound = soundbreak;
-        go.GetComponent<m3BonusBreak>().type = type;
+        //go.GetComponent<m3BonusBreak>().type = type;
 
         if (go.GetComponent<increaseInStart>() == null)
             go.AddComponent<increaseInStart>();

@@ -35,44 +35,11 @@ public class m3CellClick : MonoBehaviour
 
             if (Vector3.Distance(realPos, wantPos) < 0.1f)
             {
-                swap.testSwap();
-                swap.mode = swapMode.noSelect;
-                swap.first.go = null;
-                swap.first.pos = Vector2.zero;
-                swap.second.go = null;
-                swap.second.pos = Vector2.zero;
+                cell.board.SendMessage("testSwap",SendMessageOptions.DontRequireReceiver);
+                cell.board.SendMessage("resetSwap", SendMessageOptions.DontRequireReceiver);
             }
         }
 
-        /*
-        if (actionM3Click.second != null)
-            if (actionM3Click.second.gameObject != null)
-                if (moveCell.canmove && actionM3Click.second.position == actionM3Click.second.gameObject.transform.position)
-                {
-                    bool val1 = ((actionM3Kill)actionM3Click.first.Actions["kill"]).check();
-                    bool val2 = ((actionM3Kill)actionM3Click.second.Actions["kill"]).check();
-
-                    if ((!val1) && (!val2))
-                    {
-                        //Debug.Log("move not ok");
-                        ((actionM3Click)cell.Actions["click"]).undo();
-                    }
-                    else
-                    {
-                        //Debug.Log("move ok");
-                        ((actionM3Kill)actionM3Click.first.Actions["kill"]).Update();
-                        ((actionM3Kill)actionM3Click.second.Actions["kill"]).Update();
-
-                        actionM3Click.first = null;
-                        actionM3Click.second = null;
-
-                        if (m3BoardData.allowTurn > 0)
-                            m3BoardData.allowTurn--;
-
-                    }
-
-                }
-                */
     }
 
     private void OnMouseDown()
@@ -80,39 +47,36 @@ public class m3CellClick : MonoBehaviour
         if (moveCell.canmove)
             if (swap.mode == swapMode.noSelect)
             {
-                swap.first.go = this.gameObject;
-                swap.first.pos = cell.pos;
-
-                swap.mode = swapMode.firstSelect;
+                cell.board.SendMessage(
+                    "onSwapSelect",
+                    new swapSelect(this.gameObject, cell.pos, swapMode.firstSelect),
+                    SendMessageOptions.DontRequireReceiver);
             }
             else if (swap.mode == swapMode.firstSelect)
             {
 
                 if (Vector2.Distance(swap.first.pos, cell.pos) <= 1.0f)
                 {
-                    swap.second.go = this.gameObject;
-                    swap.second.pos = cell.pos;
-
-                    swap.goSwap();
-
-                    swap.mode = swapMode.secondSelect;
+                    cell.board.SendMessage(
+                        "onSwapSelect",
+                        new swapSelect(this.gameObject, cell.pos, swapMode.secondSelect),
+                        SendMessageOptions.DontRequireReceiver);
                 }
             }
-
-        /*
-        if (m3BoardData.allowTurn > 0)
-            if (moveCell.canmove && actionM3Click.second == null)
-            {
-                if (cell == actionM3Click.first)
-                    actionM3Click.first = null;
-                else
-                {
-                    string[] arg = new string[1];
-                    arg[0] = "";
-
-                    ((actionM3Click)cell.Actions["click"]).go(arg);
-                }
-            }
-            */
     }
+}
+
+public class swapSelect
+{
+    public GameObject gameObject;
+    public Vector2 pos;
+    public swapMode mode;
+
+    public swapSelect(GameObject gameObject,Vector2 pos,swapMode mode)
+    {
+        this.gameObject = gameObject;
+        this.pos = pos;
+        this.mode = mode;
+    }
+
 }

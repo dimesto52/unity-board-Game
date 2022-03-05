@@ -24,7 +24,7 @@ public class gemsSwap : MonoBehaviour
     public gemsSwaping first;
     public gemsSwaping second;
 
-    public swapMode mode;
+    public swapMode mode = swapMode.noSelect;
 
     public Sprite selectedSprite;
     public Sprite baseSprite;
@@ -68,6 +68,34 @@ public class gemsSwap : MonoBehaviour
         e.go.GetComponent<selectBack>().pos = e.pos;
         e.go.GetComponent<selectBack>().swap = this;
         //e.go.AddComponent<m3UpdateEndMove>();
+    }
+    public void onSwapSelect(swapSelect e)
+    {
+        if (mode == swapMode.noSelect)
+        {
+            first.go = e.gameObject;
+            first.pos = e.pos;
+
+            mode = e.mode;
+        }
+        else if(mode == swapMode.firstSelect)
+        {
+
+            second.go = e.gameObject;
+            second.pos = e.pos;
+
+            goSwap();
+
+            mode = e.mode;
+        }
+    }
+    public void resetSwap()
+    {
+        mode = swapMode.noSelect;
+        first.go = null;
+        first.pos = Vector2.zero;
+        second.go = null;
+        second.pos = Vector2.zero;
     }
     public void testSwap()
     {

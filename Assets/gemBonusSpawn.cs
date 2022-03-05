@@ -68,6 +68,8 @@ public class gemBonusSpawn : MonoBehaviour
         go.transform.position = transform.position + new Vector3(pos.x, pos.y, -1);
         go.transform.parent = spawn.Container.transform;
 
+        go.AddComponent<cellLinkBonus>().value = idBonus;
+
         board.container.setcell(pos, bonus.id);
         board.gocontainer.setcell(pos, go);
 

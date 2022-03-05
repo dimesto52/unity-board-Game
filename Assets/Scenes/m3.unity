@@ -465,6 +465,7 @@ GameObject:
   - component: {fileID: 1360891546}
   - component: {fileID: 1360891547}
   - component: {fileID: 1360891548}
+  - component: {fileID: 1360891549}
   m_Layer: 0
   m_Name: board
   m_TagString: Untagged
@@ -656,6 +657,45 @@ MonoBehaviour:
       type: 3}
     patern: {fileID: 11400000, guid: 84ad2bc588ff7ab46a60611c1bbb13eb, type: 2}
     id: 3
+  posNewBonus: []
+  idNewBonus: 
+--- !u!114 &1360891549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360891540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408308a7f6ed821469e9ba1f2819579d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  first:
+    go: {fileID: 0}
+    pos: {x: 0, y: 0}
+    BonusId: 0
+  second:
+    go: {fileID: 0}
+    pos: {x: 0, y: 0}
+    BonusId: 0
+  mix:
+  - GemsBonusId1: 8
+    GemsBonusId2: 4
+    result: {fileID: 8425032644258207736, guid: ed6c754a3c7966b479f12b6a2f38aac0,
+      type: 3}
+  - GemsBonusId1: 9
+    GemsBonusId2: 5
+    result: {fileID: 8425032644258207736, guid: 477daae29f8c7ed47ac85dc834d4dab6,
+      type: 3}
+  - GemsBonusId1: 10
+    GemsBonusId2: 6
+    result: {fileID: 8425032644258207736, guid: 5d20442190b42de40a1ff039a777e33e,
+      type: 3}
+  - GemsBonusId1: 11
+    GemsBonusId2: 7
+    result: {fileID: 8425032644258207736, guid: 6b935e33ede3d6749b0dbe7228ff23d8,
+      type: 3}
 --- !u!1 &1524049489
 GameObject:
   m_ObjectHideFlags: 0
